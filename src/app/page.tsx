@@ -1,7 +1,13 @@
 export default function Home() {
   return (
     <main>
-      Hello
+      <Contents />
     </main>
   );
+}
+
+async function Contents() {
+  return (
+    <h2>Contents</h2>
+  )
 }

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  arangodb:
+    image: arangodb
+    container_name: arangodb
+    ports:
+      - "8529:8529"
+    environment:
+      - ARANGO_ROOT_PASSWORD=hello1234
+    restart: always
+    volumes:
+      - arangodb_data:/var/lib/arangodb3
+
+volumes:
+  arangodb_data:
