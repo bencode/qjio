@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-name=qijunio
-version=`node -pe "require('./package.json').version"`
-revision=`git rev-parse --verify HEAD --short`
+# Use jq to parse package.json
+name=$(jq -r '.name' ./package.json)
+version=$(jq -r '.version' ./package.json)
+revision=$(git rev-parse --verify HEAD --short)
 namespace="registry.qijun.io"
 path="${namespace}/${name}"
 tag="$version-$revision"
@@ -14,4 +15,5 @@ docker build -t $target .
 echo "build success!"
 echo $target
 
-#docker push $target
+# Uncomment to push the image
+# docker push $target
