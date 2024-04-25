@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-name=`node -pe "require('./package.json').name"`
+name=qijunio
 version=`node -pe "require('./package.json').version"`
 revision=`git rev-parse --verify HEAD --short`
 namespace="registry.qijun.io"
