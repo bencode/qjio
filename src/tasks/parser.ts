@@ -1,6 +1,7 @@
 import createDebug from 'debug'
 import markdown from 'markdown-it'
 import type { Block } from '../core/types'
+import { parseValue } from './value'
 
 const debug = createDebug('parser')
 
@@ -18,33 +19,50 @@ type Node = {
 
 type Dict = Record<string, unknown>
 
-export function parse(body: string, opts: ParseOptions) {
-  const md = markdown()
-  const nodes = md.parse(body, {})
+export function Parser() {
+  const nameMap = new Map<string, Block>()
+  const idMap = new Map<string, Block>()
 
-  if (nodes.length > 0) {
-    return parseBlock(nodes, { id: opts.id, name: opts.name })
+  const ctx = {
+    nameMap,
+    idMap,
   }
 
-  const empty: Block= {
-    id: opts.id,
-    name: opts.name,
-    type: 'document',
-    props: {},
-    body: [],
-    refs: [],
+  const parse = (body: string, opts: ParseOptions) => {
+    const md = markdown()
+    const nodes = md.parse(body, {})
+
+    if (nodes.length > 0) {
+      return parseBlock(nodes, { id: opts.id, name: opts.name }, ctx)
+    }
+
+    const empty: Block= {
+      id: opts.id,
+      name: opts.name,
+      type: 'document',
+      props: {},
+      children: [],
+      refs: [],
+    }
+    return empty
   }
-  return empty
+
+  return { parse }
 }
 
-function parseBlock(nodes: Node[], opts: { id: string; name: string }) {
+type ParserContext = {
+  nameMap: Map<string, Block>
+  idMap: Map<string, Block>
+}
+
+function parseBlock(nodes: Node[], opts: { id: string; name: string }, ctx: ParserContext) {
   const [props, next] = parseBlockProps(nodes)
   const block: Block = {
     id: props.id as string ?? opts.id,
     name: props.name as string ?? opts.name,
     type: 'document',
     props,
-    body: [],
+    children: [],
     refs: [],
   }
   console.log(block)
@@ -97,27 +115,4 @@ function parseProps(content: string) {
     }
     return acc
   }, {} as Dict)
-}
-
-function parseValue(value: string) {
-  if (value === '') {
-    return null
-  }
-  if (value === 'true') {
-    return true
-  }
-  if (value === 'false') {
-    return false
-  }
-  if (value === 'null') {
-    return null
-  }
-  if (value === 'undefined') {
-    return undefined
-  }
-  const reNum = /^(\d+)?(?:\.(\d+))?$/
-  if (reNum.test(value)) {
-    return parseInt(value, 10)
-  }
-  return value
 }

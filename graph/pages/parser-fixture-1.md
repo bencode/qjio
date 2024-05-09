@@ -1,6 +1,7 @@
 category:: #[[web]]
-tags:: #[[web]]
+tags:: #[[web]] #[[typescript]] #[[test]]
 size:: 100
+colors:: red blue
 open:: true
 
 - 简介
@@ -13,4 +14,5 @@ open:: true
 		- 内容B
 - 详情 ((663c7ffe-f293-4f38-8ec1-7bbf788d14f5))
 	- 段落1
+-
 -

@@ -5,7 +5,7 @@
     "attrs": null,
     "map": [
       0,
-      4
+      5
     ],
     "nesting": 1,
     "level": 0,
@@ -23,7 +23,7 @@
     "attrs": null,
     "map": [
       0,
-      4
+      5
     ],
     "nesting": 0,
     "level": 1,
@@ -66,7 +66,7 @@
         "nesting": 0,
         "level": 0,
         "children": null,
-        "content": "tags:: #[[web]]",
+        "content": "tags:: #[[web]] #[[typescript]] #[[test]]",
         "markup": "",
         "info": "",
         "meta": null,
@@ -126,6 +126,36 @@
         "nesting": 0,
         "level": 0,
         "children": null,
+        "content": "colors:: red blue",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "softbreak",
+        "tag": "br",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
         "content": "open:: true",
         "markup": "",
         "info": "",
@@ -134,7 +164,7 @@
         "hidden": false
       }
     ],
-    "content": "category:: #[[web]]\ntags:: #[[web]]\nsize:: 100\nopen:: true",
+    "content": "category:: #[[web]]\ntags:: #[[web]] #[[typescript]] #[[test]]\nsize:: 100\ncolors:: red blue\nopen:: true",
     "markup": "",
     "info": "",
     "meta": null,
@@ -161,8 +191,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      5,
-      16
+      6,
+      18
     ],
     "nesting": 1,
     "level": 0,
@@ -179,8 +209,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      5,
-      13
+      6,
+      14
     ],
     "nesting": 1,
     "level": 1,
@@ -197,8 +227,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      5,
-      8
+      6,
+      9
     ],
     "nesting": 1,
     "level": 2,
@@ -215,8 +245,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      5,
-      8
+      6,
+      9
     ],
     "nesting": 0,
     "level": 3,
@@ -324,8 +354,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      8,
-      13
+      9,
+      14
     ],
     "nesting": 1,
     "level": 2,
@@ -342,8 +372,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      8,
-      11
+      9,
+      12
     ],
     "nesting": 1,
     "level": 3,
@@ -360,8 +390,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      8,
-      10
+      9,
+      11
     ],
     "nesting": 1,
     "level": 4,
@@ -378,8 +408,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      8,
-      10
+      9,
+      11
     ],
     "nesting": 0,
     "level": 5,
@@ -457,8 +487,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      10,
-      11
+      11,
+      12
     ],
     "nesting": 1,
     "level": 4,
@@ -475,8 +505,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      10,
-      11
+      11,
+      12
     ],
     "nesting": 1,
     "level": 5,
@@ -493,8 +523,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      10,
-      11
+      11,
+      12
     ],
     "nesting": 1,
     "level": 6,
@@ -511,8 +541,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      10,
-      11
+      11,
+      12
     ],
     "nesting": 0,
     "level": 7,
@@ -605,8 +635,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      11,
-      13
+      12,
+      14
     ],
     "nesting": 1,
     "level": 3,
@@ -623,8 +653,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      11,
-      12
+      12,
+      13
     ],
     "nesting": 1,
     "level": 4,
@@ -641,8 +671,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      11,
-      12
+      12,
+      13
     ],
     "nesting": 0,
     "level": 5,
@@ -690,8 +720,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      12,
-      13
+      13,
+      14
     ],
     "nesting": 1,
     "level": 4,
@@ -708,8 +738,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      12,
-      13
+      13,
+      14
     ],
     "nesting": 1,
     "level": 5,
@@ -726,8 +756,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      12,
-      13
+      13,
+      14
     ],
     "nesting": 1,
     "level": 6,
@@ -744,8 +774,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      12,
-      13
+      13,
+      14
     ],
     "nesting": 0,
     "level": 7,
@@ -868,8 +898,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      13,
-      15
+      14,
+      16
     ],
     "nesting": 1,
     "level": 1,
@@ -886,8 +916,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      13,
-      14
+      14,
+      15
     ],
     "nesting": 1,
     "level": 2,
@@ -904,8 +934,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      13,
-      14
+      14,
+      15
     ],
     "nesting": 0,
     "level": 3,
@@ -953,8 +983,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      14,
-      15
+      15,
+      16
     ],
     "nesting": 1,
     "level": 2,
@@ -971,8 +1001,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      14,
-      15
+      15,
+      16
     ],
     "nesting": 1,
     "level": 3,
@@ -989,8 +1019,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      14,
-      15
+      15,
+      16
     ],
     "nesting": 1,
     "level": 4,
@@ -1007,8 +1037,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      14,
-      15
+      15,
+      16
     ],
     "nesting": 0,
     "level": 5,
@@ -1101,8 +1131,41 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      15,
-      16
+      16,
+      17
+    ],
+    "nesting": 1,
+    "level": 1,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "list_item_close",
+    "tag": "li",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 1,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "list_item_open",
+    "tag": "li",
+    "attrs": null,
+    "map": [
+      17,
+      18
     ],
     "nesting": 1,
     "level": 1,

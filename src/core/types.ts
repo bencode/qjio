@@ -1,20 +1,14 @@
 export type Block = {
   type: string
-  id: string
+  id?: string
   name?: string
   props: Record<string, unknown>
-  body: Element[]
+  children: Block[]
   refs: (BlockRef | Block)[]
 }
 
-type BlockRef = {
-  type: 'ref',
+export type BlockRef = {
+  type: '$ref',
   id?: string
   name?: string
-}
-
-export type Element = {
-  name: string
-  props: Record<string, unknown>
-  children: Element[]
 }
