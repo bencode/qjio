@@ -1,7 +1,5 @@
 import type { BlockRef } from '../core/types'
 
-// const reModifier = /^#([a-zA-Z]\w*)$/
-
 export function parseValue(value: string) {
   // #[[name]] ((id)) other
   const re = /(?:#\[\[([^\]]+)\]\])|(?:\(\((\w+)\)\))|([\S]+)/g
@@ -20,11 +18,7 @@ export function parseValue(value: string) {
     return null
   }
 
-  if (result.length === 1) {
-    return result[0]
-  }
-
-  return result
+  return result.length === 1 ? result[0] : result
 }
 
 function parseItem(value: string) {
