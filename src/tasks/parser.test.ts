@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 import { parse } from './parser'
 
 test('parse', async() => {
-  const path = pathUtil.join(process.cwd(), 'graph/pages/parser-fixture.md')
+  const path = pathUtil.join(process.cwd(), 'graph/pages/parser-fixture-1.md')
   const body = await fs.readFile(path, 'utf-8')
   const name = pathUtil.basename(path, pathUtil.extname(path))
   const id = nanoid()

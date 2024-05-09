@@ -1,17 +1,20 @@
 export type Block = {
   type: string
-  id?: string
+  id: string
   name?: string
-  props: Record<string, Value | null | undefined>
-  body?: unknown
-  children: (BlockRef | Block)[]
+  props: Record<string, unknown>
+  body: Element[]
+  refs: (BlockRef | Block)[]
 }
 
-type Value = string | number | boolean
-type BlockRef = string
+type BlockRef = {
+  type: 'ref',
+  id?: string
+  name?: string
+}
 
 export type Element = {
-  tag: string
-  props: Record<string, Value>
+  name: string
+  props: Record<string, unknown>
   children: Element[]
 }
