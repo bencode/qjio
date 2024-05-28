@@ -192,7 +192,7 @@
     "attrs": null,
     "map": [
       6,
-      18
+      21
     ],
     "nesting": 1,
     "level": 0,
@@ -210,7 +210,7 @@
     "attrs": null,
     "map": [
       6,
-      14
+      11
     ],
     "nesting": 1,
     "level": 1,
@@ -228,7 +228,7 @@
     "attrs": null,
     "map": [
       6,
-      9
+      7
     ],
     "nesting": 1,
     "level": 2,
@@ -246,7 +246,330 @@
     "attrs": null,
     "map": [
       6,
-      9
+      7
+    ],
+    "nesting": 0,
+    "level": 3,
+    "children": [
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "Infomation",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      }
+    ],
+    "content": "Infomation",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "p",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 2,
+    "children": null,
+    "content": "",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": true
+  },
+  {
+    "type": "bullet_list_open",
+    "tag": "ul",
+    "attrs": null,
+    "map": [
+      7,
+      11
+    ],
+    "nesting": 1,
+    "level": 2,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "list_item_open",
+    "tag": "li",
+    "attrs": null,
+    "map": [
+      7,
+      11
+    ],
+    "nesting": 1,
+    "level": 3,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "attrs": null,
+    "map": [
+      7,
+      11
+    ],
+    "nesting": 1,
+    "level": 4,
+    "children": null,
+    "content": "",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": true
+  },
+  {
+    "type": "inline",
+    "tag": "",
+    "attrs": null,
+    "map": [
+      7,
+      11
+    ],
+    "nesting": 0,
+    "level": 5,
+    "children": [
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "type:: code",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "softbreak",
+        "tag": "br",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "count:: 100",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "softbreak",
+        "tag": "br",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "open:: false",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "softbreak",
+        "tag": "br",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      },
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "colors:: red yellow",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      }
+    ],
+    "content": "type:: code\ncount:: 100\nopen:: false\ncolors:: red yellow",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "p",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 4,
+    "children": null,
+    "content": "",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": true
+  },
+  {
+    "type": "list_item_close",
+    "tag": "li",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 3,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "bullet_list_close",
+    "tag": "ul",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 2,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "list_item_close",
+    "tag": "li",
+    "attrs": null,
+    "map": null,
+    "nesting": -1,
+    "level": 1,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "list_item_open",
+    "tag": "li",
+    "attrs": null,
+    "map": [
+      11,
+      18
+    ],
+    "nesting": 1,
+    "level": 1,
+    "children": null,
+    "content": "",
+    "markup": "-",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "attrs": null,
+    "map": [
+      11,
+      13
+    ],
+    "nesting": 1,
+    "level": 2,
+    "children": null,
+    "content": "",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": true
+  },
+  {
+    "type": "inline",
+    "tag": "",
+    "attrs": null,
+    "map": [
+      11,
+      13
     ],
     "nesting": 0,
     "level": 3,
@@ -289,36 +612,6 @@
         "nesting": 0,
         "level": 0,
         "children": null,
-        "content": "id:: xxx",
-        "markup": "",
-        "info": "",
-        "meta": null,
-        "block": false,
-        "hidden": false
-      },
-      {
-        "type": "softbreak",
-        "tag": "br",
-        "attrs": null,
-        "map": null,
-        "nesting": 0,
-        "level": 0,
-        "children": null,
-        "content": "",
-        "markup": "",
-        "info": "",
-        "meta": null,
-        "block": false,
-        "hidden": false
-      },
-      {
-        "type": "text",
-        "tag": "",
-        "attrs": null,
-        "map": null,
-        "nesting": 0,
-        "level": 0,
-        "children": null,
         "content": "第二段",
         "markup": "",
         "info": "",
@@ -327,7 +620,7 @@
         "hidden": false
       }
     ],
-    "content": "简介\nid:: xxx\n第二段",
+    "content": "简介\n第二段",
     "markup": "",
     "info": "",
     "meta": null,
@@ -354,8 +647,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      9,
-      14
+      13,
+      18
     ],
     "nesting": 1,
     "level": 2,
@@ -372,8 +665,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      9,
-      12
+      13,
+      16
     ],
     "nesting": 1,
     "level": 3,
@@ -390,8 +683,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      9,
-      11
+      13,
+      15
     ],
     "nesting": 1,
     "level": 4,
@@ -408,8 +701,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      9,
-      11
+      13,
+      15
     ],
     "nesting": 0,
     "level": 5,
@@ -487,8 +780,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      11,
-      12
+      15,
+      16
     ],
     "nesting": 1,
     "level": 4,
@@ -505,8 +798,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      11,
-      12
+      15,
+      16
     ],
     "nesting": 1,
     "level": 5,
@@ -523,8 +816,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      11,
-      12
+      15,
+      16
     ],
     "nesting": 1,
     "level": 6,
@@ -541,8 +834,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      11,
-      12
+      15,
+      16
     ],
     "nesting": 0,
     "level": 7,
@@ -635,8 +928,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      12,
-      14
+      16,
+      18
     ],
     "nesting": 1,
     "level": 3,
@@ -653,8 +946,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      12,
-      13
+      16,
+      17
     ],
     "nesting": 1,
     "level": 4,
@@ -671,8 +964,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      12,
-      13
+      16,
+      17
     ],
     "nesting": 0,
     "level": 5,
@@ -720,8 +1013,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      13,
-      14
+      17,
+      18
     ],
     "nesting": 1,
     "level": 4,
@@ -738,8 +1031,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      13,
-      14
+      17,
+      18
     ],
     "nesting": 1,
     "level": 5,
@@ -756,8 +1049,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      13,
-      14
+      17,
+      18
     ],
     "nesting": 1,
     "level": 6,
@@ -774,8 +1067,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      13,
-      14
+      17,
+      18
     ],
     "nesting": 0,
     "level": 7,
@@ -898,8 +1191,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      14,
-      16
+      18,
+      20
     ],
     "nesting": 1,
     "level": 1,
@@ -916,8 +1209,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      14,
-      15
+      18,
+      19
     ],
     "nesting": 1,
     "level": 2,
@@ -934,8 +1227,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      14,
-      15
+      18,
+      19
     ],
     "nesting": 0,
     "level": 3,
@@ -983,8 +1276,8 @@
     "tag": "ul",
     "attrs": null,
     "map": [
-      15,
-      16
+      19,
+      20
     ],
     "nesting": 1,
     "level": 2,
@@ -1001,8 +1294,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      15,
-      16
+      19,
+      20
     ],
     "nesting": 1,
     "level": 3,
@@ -1019,8 +1312,8 @@
     "tag": "p",
     "attrs": null,
     "map": [
-      15,
-      16
+      19,
+      20
     ],
     "nesting": 1,
     "level": 4,
@@ -1037,8 +1330,8 @@
     "tag": "",
     "attrs": null,
     "map": [
-      15,
-      16
+      19,
+      20
     ],
     "nesting": 0,
     "level": 5,
@@ -1131,8 +1424,8 @@
     "tag": "li",
     "attrs": null,
     "map": [
-      16,
-      17
+      20,
+      21
     ],
     "nesting": 1,
     "level": 1,
@@ -1145,37 +1438,71 @@
     "hidden": false
   },
   {
-    "type": "list_item_close",
-    "tag": "li",
+    "type": "paragraph_open",
+    "tag": "p",
+    "attrs": null,
+    "map": [
+      20,
+      21
+    ],
+    "nesting": 1,
+    "level": 2,
+    "children": null,
+    "content": "",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": true
+  },
+  {
+    "type": "inline",
+    "tag": "",
+    "attrs": null,
+    "map": [
+      20,
+      21
+    ],
+    "nesting": 0,
+    "level": 3,
+    "children": [
+      {
+        "type": "text",
+        "tag": "",
+        "attrs": null,
+        "map": null,
+        "nesting": 0,
+        "level": 0,
+        "children": null,
+        "content": "((663c7ffe-f293-4f38-8ec1-7bbf788d14f5)) 引用",
+        "markup": "",
+        "info": "",
+        "meta": null,
+        "block": false,
+        "hidden": false
+      }
+    ],
+    "content": "((663c7ffe-f293-4f38-8ec1-7bbf788d14f5)) 引用",
+    "markup": "",
+    "info": "",
+    "meta": null,
+    "block": true,
+    "hidden": false
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "p",
     "attrs": null,
     "map": null,
     "nesting": -1,
-    "level": 1,
+    "level": 2,
     "children": null,
     "content": "",
-    "markup": "-",
+    "markup": "",
     "info": "",
     "meta": null,
     "block": true,
-    "hidden": false
-  },
-  {
-    "type": "list_item_open",
-    "tag": "li",
-    "attrs": null,
-    "map": [
-      17,
-      18
-    ],
-    "nesting": 1,
-    "level": 1,
-    "children": null,
-    "content": "",
-    "markup": "-",
-    "info": "",
-    "meta": null,
-    "block": true,
-    "hidden": false
+    "hidden": true
   },
   {
     "type": "list_item_close",

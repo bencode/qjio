@@ -3,6 +3,7 @@ export type Block = {
   id?: string
   name?: string
   props: Record<string, unknown>
+  body: unknown
   children: Block[]
   refs: (BlockRef | Block)[]
 }
