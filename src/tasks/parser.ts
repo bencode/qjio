@@ -55,6 +55,7 @@ function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
     names,
     ids,
   }
+
   const props = parseBlockProps(nodes, 0)
   const lis = findEncludeNodeGroup(nodes, 'list_item', 1)
   const children = lis.map(li => parseBlock(li, 1, ctx)).filter(v => v)
@@ -76,21 +77,23 @@ function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
 // > paragraph
 function parseBlockProps(nodes: Node[], level: number) {
   const propNodes = findEncludeNode(nodes, 'paragraph', level)
-  if (propNodes) {
-    const inline = findChildNode(propNodes, 'inline')
-    return inline ? parseProps(inline.content || '') : {}
+  if (!propNodes) {
+    return {}
   }
-  return {}
+  const inline = findChildNode(propNodes, 'inline')
+  if (!inline) {
+    return {}
+  }
+  const { props } = parseContent(inline.content || '')
+  return props
 }
 
 // list_item
 function parseBlock(nodes: Node[], level: number, ctx: ParserContext) {
   const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
-  const body = bodyNodes ? parseBlockBody(bodyNodes, level + 1) : ''
+  const { body, props } = bodyNodes ? parseBlockContent(bodyNodes, level + 1) : { body: '', props: {} }
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
-  const props = lis.length > 0 ? parseBlockProps(lis[0], level + 3) : {}
-  const childNodes = Object.keys(props).length > 0 ? lis.slice(1) : lis
-  const children = childNodes.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
+  const children = lis.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
 
   const block: Block = {
     type: 'text',
@@ -102,9 +105,10 @@ function parseBlock(nodes: Node[], level: number, ctx: ParserContext) {
   return block
 }
 
-function parseBlockBody(nodes: Node[], _level: number) {
+// paragraph
+function parseBlockContent(nodes: Node[], _level: number) {
   const inline = findChildNode(nodes, 'inline')
-  return inline?.content || ''
+  return parseContent(inline?.content || '')
 }
 
 function findChildNode(nodes: Node[], type: string) {
@@ -147,16 +151,20 @@ function findIndex(list: Node[], start: number, type: string, level: number) {
   return -1
 }
 
-function parseProps(content: string) {
+function parseContent(content: string) {
   const re = /^([-\w]+)::(.*)$/
-  const list = content.split(/\n/)
-  return list.reduce((acc, line) => {
+  const lines = content.split(/\n/)
+  const body: string[] = []
+  const props: Dict = {}
+  lines.forEach(line => {
     const m = re.exec(line)
     if (m) {
-      acc[m[1]] = parseValue(m[2].trim())
+      props[m[1]] = parseValue(m[2].trim())
+    } else {
+      body.push(line)
     }
-    return acc
-  }, {} as Dict)
+  })
+  return { body: body.join('\n'), props }
 }
 
 function createRefs(ctx: ParserContext) {
