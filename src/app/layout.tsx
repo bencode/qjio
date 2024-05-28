@@ -3,7 +3,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: '研(数学)=>习(编程)',
-  description: 'study(math) => practice(programming)'
+  description: 'study(math) => practice(programming)',
+  keywords: ['functional programming', 'mathematics', 'learnning skills', 'deliberate practice']
 };
 
 export default function RootLayout({
