@@ -8,6 +8,6 @@ export default function Home() {
 
 async function Contents() {
   return (
-    <h2>Contents</h2>
+    <h1>study(math) => practice(programming)</h1>
   )
 }

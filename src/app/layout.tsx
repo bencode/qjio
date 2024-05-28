@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'qijun.io',
-  description: 'qijun.io'
+  title: '研(数学)=>习(编程)',
+  description: 'study(math) => practice(programming)'
 };
 
 export default function RootLayout({
