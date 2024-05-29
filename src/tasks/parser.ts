@@ -1,7 +1,7 @@
 import createDebug from 'debug'
 import markdown from 'markdown-it'
 import type { Block, BlockRef } from '../core/types'
-import { parseValue } from './value'
+import { parseValue, parseRefs } from './value'
 
 const debug = createDebug('parser')
 
@@ -96,7 +96,7 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
     keys: new Set<string>()
   }
   const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
-  const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1) : { body: '', props: {} }
+  const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1, ctx) : { body: '', props: {} }
   const { type, id, name, ...props } = allProps
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
   const children = lis.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
@@ -123,8 +123,17 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
 }
 
 // paragraph
-function parseBlockContent(nodes: Node[], _level: number) {
+function parseBlockContent(nodes: Node[], _level: number, ctx: ParserContext) {
   const inline = findChildNode(nodes, 'inline')
+  const refs = parseRefs(inline?.content || '')
+  refs.forEach(ref => {
+    if (ref.name) {
+      ctx.names.add(ref.name)
+    }
+    if (ref.key) {
+      ctx.keys.add(ref.key)
+    }
+  })
   return parseContent(inline?.content || '')
 }
 

@@ -4,8 +4,8 @@ export type Block = {
   name?: string
   props: Record<string, unknown>
   body: unknown
-  children: Block[]
-  refs: (BlockRef | Block)[]
+  children: (Block | BlockRef)[]
+  refs: BlockRef[]
 }
 
 export type BlockRef = {

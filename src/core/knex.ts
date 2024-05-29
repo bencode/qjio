@@ -1,6 +1,8 @@
 import createKnexInstance, { Knex } from 'knex'
 import { config } from '../config/app'
 
+export { Knex }
+
 export function createKnex() {
   const knex = createKnexInstance({
     client: 'better-sqlite3',

@@ -2,7 +2,7 @@ import type { BlockRef } from '../core/types'
 
 export function parseValue(value: string) {
   // #[[name]] ((id)) other
-  const re = /(?:#\[\[([^\]]+)\]\])|(?:\(\((\w+)\)\))|([\S]+)/g
+  const re = /(?:#?\[\[([^\]]+)\]\])|(?:\(\((\w+)\)\))|([\S]+)/g
   const groups = Array.from(value.matchAll(re))
   const result = groups.map(match => {
     if (match[1]) {
@@ -19,6 +19,21 @@ export function parseValue(value: string) {
   }
 
   return result.length === 1 ? result[0] : result
+}
+
+export function parseRefs(content: string) {
+  const re = /(?:#?\[\[([^\]])+\]\])|(?:\(\((\w+)\)\))/g
+  const groups = Array.from(content.matchAll(re))
+  const refs =groups.map(match => {
+    if (match[1]) {
+      return { type: '$ref',name: match[1]} as BlockRef
+    }
+    if (match[2]) {
+      return { type: '$ref', id: match[2] } as BlockRef
+    }
+    throw new Error('assert false')
+  })
+  return refs
 }
 
 function parseItem(value: string) {
