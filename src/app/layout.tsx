@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '学(数学)=>习(编程)',
+  title: '研(数学)=>习(编程)',
   description: 'study(math) => practice(programming)',
   keywords: ['functional programming', 'mathematics', 'combinatorics', 'programming languages']
 };

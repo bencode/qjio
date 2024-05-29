@@ -19,8 +19,12 @@ type Node = {
 
 type Dict = Record<string, unknown>
 
+export type IParser = {
+  parse: (body: string, opts: ParseOptions) => Block
+}
+
 export function Parser() {
-  const parse = (body: string, opts: ParseOptions) => {
+  const parse = (body: string, opts: ParseOptions): Block => {
     const md = markdown()
     const nodes = md.parse(body, {})
 
@@ -49,11 +53,9 @@ type ParserContext = {
 }
 
 function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
-  const names = new Set<string>()
-  const ids = new Set<string>()
   const ctx = {
-    names,
-    ids,
+    names: new Set<string>(),
+    ids: new Set<string>(),
   }
 
   const props = parseBlockProps(nodes, 0)
@@ -69,9 +71,7 @@ function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
     children,
     refs,
   }
-
-  console.log('%o', block)
-  return nodes
+  return block
 }
 
 // > paragraph
@@ -89,19 +89,35 @@ function parseBlockProps(nodes: Node[], level: number) {
 }
 
 // list_item
-function parseBlock(nodes: Node[], level: number, ctx: ParserContext) {
+function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
+  const ctx = {
+    names: new Set<string>(),
+    ids: new Set<string>()
+  }
   const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
-  const { body, props } = bodyNodes ? parseBlockContent(bodyNodes, level + 1) : { body: '', props: {} }
+  const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1) : { body: '', props: {} }
+  const { type, id, name, ...props } = allProps
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
   const children = lis.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
 
   const block: Block = {
-    type: 'text',
+    type: (type || 'text') as string,
+    id: id as string,
+    name: name as string,
     props,
     body,
     children,
     refs: []
   }
+
+  if (block.id) {
+    pctx.ids.add(block.id)
+  }
+
+  if (block.name) {
+    pctx.ids.add(block.name)
+  }
+
   return block
 }
 

@@ -40,3 +40,4 @@ cert/
 build/
 
 graph/logseq/.*
+graph/logseq/bak/

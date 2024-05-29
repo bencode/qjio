@@ -1,8 +1,9 @@
-import markdown from 'markdown-it'
+import { nanoid } from 'nanoid'
 import * as pathUtil from 'node:path'
 import * as fs from 'node:fs'
 import { globSync } from 'glob'
 import { config } from '../config/app'
+import { IParser, Parser } from './parser'
 
 if (require.main === module) {
   main()
@@ -11,20 +12,15 @@ if (require.main === module) {
 async function main() {
   const files = globSync('*.md', { cwd: config.graphRoot })
   const paths = files.map(path => pathUtil.join(config.graphRoot, path))
+  const parser  = Parser()
   for (const path of paths) {
-    compileFile(path)
+    compileFile(parser, path)
   }
 }
 
-function compileFile(path: string) {
+function compileFile(parser: IParser, path: string) {
   const body = fs.readFileSync(path, 'utf-8')
-  const node = parse(body)
-  // const filename = pathUtil.basename(path, pathUtil.extname(path))
-  // fs.writeFileSync(`build/${filename}.json`, JSON.stringify(nodes))
-}
-
-function parse(body: string) {
-  const md = markdown()
-  const nodes = md.parse(body, {})
-  //console.log(nodes)
+  const name = pathUtil.basename(path, pathUtil.extname(path))
+  const node = parser.parse(body, { name, id: nanoid() })
+  console.log('compile, %s -> %o', path, node)
 }
