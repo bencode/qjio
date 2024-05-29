@@ -6,7 +6,7 @@ import { parseValue } from './value'
 const debug = createDebug('parser')
 
 type ParseOptions = {
-  id: string
+  key: string
   name: string
 }
 
@@ -29,11 +29,11 @@ export function Parser() {
     const nodes = md.parse(body, {})
 
     if (nodes.length > 0) {
-      return parseDocBlock(nodes, { id: opts.id, name: opts.name })
+      return parseDocBlock(nodes, { key: opts.key, name: opts.name })
     }
 
     const empty: Block= {
-      id: opts.id,
+      key: opts.key,
       name: opts.name,
       type: 'document',
       props: {},
@@ -49,13 +49,13 @@ export function Parser() {
 
 type ParserContext = {
   names: Set<string>
-  ids: Set<string>
+  keys: Set<string>
 }
 
-function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
+function parseDocBlock(nodes: Node[], opts: { key: string; name: string }) {
   const ctx = {
     names: new Set<string>(),
-    ids: new Set<string>(),
+    keys: new Set<string>(),
   }
 
   const props = parseBlockProps(nodes, 0)
@@ -63,7 +63,8 @@ function parseDocBlock(nodes: Node[], opts: { id: string; name: string }) {
   const children = lis.map(li => parseBlock(li, 1, ctx)).filter(v => v)
   const refs = createRefs(ctx)
   const block: Block = {
-    id: props.id as string ?? opts.id,
+    // key从props.id中取
+    key: props.id as string ?? opts.key,
     name: props.name as string ?? opts.name,
     type: 'document',
     body: '',
@@ -92,7 +93,7 @@ function parseBlockProps(nodes: Node[], level: number) {
 function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
   const ctx = {
     names: new Set<string>(),
-    ids: new Set<string>()
+    keys: new Set<string>()
   }
   const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
   const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1) : { body: '', props: {} }
@@ -102,7 +103,7 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
 
   const block: Block = {
     type: (type || 'text') as string,
-    id: id as string,
+    key: id as string,
     name: name as string,
     props,
     body,
@@ -110,12 +111,12 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
     refs: []
   }
 
-  if (block.id) {
-    pctx.ids.add(block.id)
+  if (block.key) {
+    pctx.keys.add(block.key)
   }
 
   if (block.name) {
-    pctx.ids.add(block.name)
+    pctx.names.add(block.name)
   }
 
   return block
@@ -185,6 +186,6 @@ function parseContent(content: string) {
 
 function createRefs(ctx: ParserContext) {
   const nameRefs = Array.from(ctx.names.values()).map(name => ({ type: '$ref', name }))
-  const idRefs = Array.from(ctx.ids.values()).map(id => ({ type: '$ref', id }))
-  return [...nameRefs, ...idRefs] as BlockRef[]
+  const keyRefs = Array.from(ctx.keys.values()).map(key => ({ type: '$ref', key }))
+  return [...nameRefs, ...keyRefs] as BlockRef[]
 }

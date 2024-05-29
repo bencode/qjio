@@ -1,6 +1,6 @@
 export type Block = {
   type: string
-  id?: string
+  key?: string
   name?: string
   props: Record<string, unknown>
   body: unknown
@@ -10,6 +10,6 @@ export type Block = {
 
 export type BlockRef = {
   type: '$ref',
-  id?: string
+  key?: string
   name?: string
 }

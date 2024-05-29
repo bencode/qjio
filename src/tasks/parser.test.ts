@@ -8,10 +8,9 @@ test('parse', async() => {
   const path = pathUtil.join(process.cwd(), 'graph/pages/parser-fixture-1.md')
   const body = await fs.readFile(path, 'utf-8')
   const name = pathUtil.basename(path, pathUtil.extname(path))
-  const id = nanoid()
+  const key = nanoid()
   const parser = Parser()
-  const node = parser.parse(body, { id, name })
+  const node = parser.parse(body, { key, name })
   // console.log(node)
-
   await fs.writeFile('test.json', JSON.stringify(node, null, 2))
 })
