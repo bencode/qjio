@@ -6,7 +6,6 @@ import { parseValue, parseRefs } from './value'
 const debug = createDebug('parser')
 
 type ParseOptions = {
-  key: string
   name: string
 }
 
@@ -29,11 +28,11 @@ export function Parser() {
     const nodes = md.parse(body, {})
 
     if (nodes.length > 0) {
-      return parseDocBlock(nodes, { key: opts.key, name: opts.name })
+      return parseDocBlock(nodes, { name: opts.name })
     }
 
     const empty: Block= {
-      key: opts.key,
+      key: undefined,
       name: opts.name,
       type: 'document',
       props: {},
@@ -52,7 +51,7 @@ type ParserContext = {
   keys: Set<string>
 }
 
-function parseDocBlock(nodes: Node[], opts: { key: string; name: string }) {
+function parseDocBlock(nodes: Node[], opts: { name: string }) {
   const ctx = {
     names: new Set<string>(),
     keys: new Set<string>(),
@@ -64,7 +63,7 @@ function parseDocBlock(nodes: Node[], opts: { key: string; name: string }) {
   const refs = createRefs(ctx)
   const block: Block = {
     // key从props.id中取
-    key: props.id as string ?? opts.key,
+    key: undefined,
     name: props.name as string ?? opts.name,
     type: 'document',
     body: '',
@@ -97,14 +96,14 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
   }
   const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
   const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1, ctx) : { body: '', props: {} }
-  const { type, id, name, ...props } = allProps
+  const { type, id, ...props } = allProps
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
   const children = lis.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
 
   const block: Block = {
     type: (type || 'text') as string,
     key: id as string,
-    name: name as string,
+    // name: name as string,
     props,
     body,
     children,

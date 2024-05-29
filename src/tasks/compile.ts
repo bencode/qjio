@@ -1,9 +1,11 @@
-import { nanoid } from 'nanoid'
+import 'dotenv/config'
+import { pick } from 'ramda'
 import * as pathUtil from 'node:path'
 import * as fs from 'node:fs'
 import { globSync } from 'glob'
+import type { CreateKnexConfig } from '../utils/knex'
+import { withKnex, Knex } from '../utils/knex'
 import { config } from '../config/app'
-import { withKnex, Knex } from '../core/knex'
 import type { Block, BlockRef } from '../core/types'
 import { IParser, Parser } from './parser'
 
@@ -16,7 +18,12 @@ async function main() {
   const paths = files.map(path => pathUtil.join(config.graphRoot, path))
   const parser  = Parser()
 
-  await withKnex(async knex => {
+  const opts = {
+    client: 'pg',
+    debug: true,
+    ...pick(['host', 'port', 'user', 'password', 'database'], config.db),
+  } as CreateKnexConfig
+  await withKnex(opts, async knex => {
     for (const path of paths) {
       await compileFile(knex, parser, path)
     }
@@ -27,10 +34,23 @@ async function main() {
 async function compileFile(knex: Knex, parser: IParser, path: string) {
   const body = fs.readFileSync(path, 'utf-8')
   const name = pathUtil.basename(path, pathUtil.extname(path))
-  const root = parser.parse(body, { name, key: nanoid() })
+  const root = parser.parse(body, { name })
   const blocks = flattenNode(root)
   for (const block of blocks) {
     global.console.debug('create block: %o', block)
+    const where = block.name ? { name: block.name } : { key: block.key }
+    const list = await knex('blocks').where(where).limit(1)
+    const data = {
+      ...block,
+      props: JSON.stringify(block.props),
+      children: JSON.stringify(block.children),
+      refs: JSON.stringify(block.refs),
+    }
+    if (list.length > 0) {
+      await knex('blocks').where({ id: list[0].id }).update(data)
+    } else {
+      await knex('blocks').insert(data)
+    }
   }
 }
 
