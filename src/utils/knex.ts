@@ -10,15 +10,17 @@ export type CreateKnexConfig = {
   user: string
   password: string
   database: string
+
+  pool?: { min: number, max: number },
   debug?: boolean
 }
 
 export function createKnex(config: CreateKnexConfig) {
   const timeout = 5_000
   const knex = createKnexInstance({
-    client: config.client,
+    client: 'pg',
     debug: config.debug,
-    pool: { min: 0, max: 1 },
+    pool: config.pool || { min: 0, max: 7 },
     // TODO 为什么这个无效，默认时间是10s，需要把它调短一些。
     acquireConnectionTimeout: timeout,
     connection: {

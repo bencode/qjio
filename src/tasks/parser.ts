@@ -1,9 +1,9 @@
-import createDebug from 'debug'
+// import createDebug from 'debug'
 import markdown from 'markdown-it'
 import type { Block, BlockRef } from '../core/types'
 import { parseValue, parseRefs } from './value'
 
-const debug = createDebug('parser')
+// const debug = createDebug('parser')
 
 type ParseOptions = {
   name: string
@@ -52,24 +52,17 @@ type ParserContext = {
 }
 
 function parseDocBlock(nodes: Node[], opts: { name: string }) {
-  const ctx = {
-    names: new Set<string>(),
-    keys: new Set<string>(),
-  }
-
   const props = parseBlockProps(nodes, 0)
   const lis = findEncludeNodeGroup(nodes, 'list_item', 1)
-  const children = lis.map(li => parseBlock(li, 1, ctx)).filter(v => v)
-  const refs = createRefs(ctx)
+  const children = lis.map(li => parseBlock(li, 1)).filter(v => v)
   const block: Block = {
-    // key从props.id中取
     key: undefined,
     name: props.name as string ?? opts.name,
     type: 'document',
     body: '',
     props,
     children,
-    refs,
+    refs: []
   }
   return block
 }
@@ -89,7 +82,7 @@ function parseBlockProps(nodes: Node[], level: number) {
 }
 
 // list_item
-function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
+function parseBlock(nodes: Node[], level: number) {
   const ctx = {
     names: new Set<string>(),
     keys: new Set<string>()
@@ -98,7 +91,7 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
   const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1, ctx) : { body: '', props: {} }
   const { type, id, ...props } = allProps
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
-  const children = lis.map(li => parseBlock(li, level + 2, ctx)).filter(v => v)
+  const children = lis.map(li => parseBlock(li, level + 2)).filter(v => v)
 
   const block: Block = {
     type: (type || 'text') as string,
@@ -107,15 +100,7 @@ function parseBlock(nodes: Node[], level: number, pctx: ParserContext) {
     props,
     body,
     children,
-    refs: []
-  }
-
-  if (block.key) {
-    pctx.keys.add(block.key)
-  }
-
-  if (block.name) {
-    pctx.names.add(block.name)
+    refs: createRefs(ctx)
   }
 
   return block

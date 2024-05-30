@@ -1,5 +1,4 @@
 import 'dotenv/config'
-import { pick } from 'ramda'
 import * as pathUtil from 'node:path'
 import * as fs from 'node:fs'
 import { globSync } from 'glob'
@@ -21,7 +20,7 @@ async function main() {
   const opts = {
     client: 'pg',
     debug: true,
-    ...pick(['host', 'port', 'user', 'password', 'database'], config.db),
+    ...config.db,
   } as CreateKnexConfig
   await withKnex(opts, async knex => {
     for (const path of paths) {
