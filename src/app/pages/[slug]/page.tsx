@@ -1,5 +1,5 @@
 import { cache } from 'react'
-import { Knex, createKnex } from '@/utils/knex'
+import { CreateKnexConfig, Knex, createKnex } from '@/utils/knex'
 import { config } from '@/config/app'
 import { Block, BlockRef } from '@/core/types'
 
@@ -88,11 +88,12 @@ const BlockRefComponent = async ({ block: ref }: BlockRefComponentProps) => {
 
 function getKnex() {
   if (!knexRef.current) {
-    knexRef.current = createKnex({
+    const opts = {
       client: 'pg',
       debug: true,
       ...config.db,
-    })
+    } as CreateKnexConfig
+    knexRef.current = createKnex(opts)
   }
   return knexRef.current!
 }
