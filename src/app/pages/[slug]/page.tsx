@@ -12,7 +12,7 @@ type Dict = Record<string, unknown>
 
 export default async function Page({ params }: { params: { slug: string } }) {
   return (
-    <div className="container">
+    <div className="qx-page container mx-auto p-4">
       <BlockRender name={params.slug} />
     </div>
   )
@@ -28,7 +28,11 @@ const BlockRender = async ({ id, name }: BlockRenderProps) => {
   if (!block) {
     return <NotFound id={id} name={name} />
   }
-  return <BlockComponent block={block} />
+  return (
+    <article className="prose prose-sky max-w-none">
+      <BlockComponent block={block} />
+    </article>
+  )
 }
 
 type BlockComponentProps = {
@@ -37,7 +41,7 @@ type BlockComponentProps = {
 
 const BlockComponent = ({ block }: BlockComponentProps) => {
   return (
-    <div className="q-block">
+    <div className="qx-block">
       {block.body ? <BlockBody value={block.body as string} /> : null}
       {Object.keys(block.props).length > 0 ? <BlockProps value={block.props} /> : null}
       {block.children.length > 0 ? <BlockList items={block.children} /> : null}
@@ -70,14 +74,14 @@ const BlockProps = ({ value: props }: BlockPropsProps) => {
   const names = Object.keys(props)
   const renderProp = (value: unknown) => {
     if (typeof value === 'object') {
-      return <dd className="object">{JSON.stringify(value)}</dd>
+      return <dd>{JSON.stringify(value)}</dd>
     }
     return <div>{`${value}`}</div>
   }
   return (
-    <ul className="q-block-props">
+    <ul className="qx-block-props">
       {names.map((name, index) => (
-        <li className="q-block-prop">
+        <li key={index}>
           <dl>
             <dt>{name}:</dt>
             {renderProp(props[name])}
@@ -94,7 +98,7 @@ type BlockChildrenProps = {
 
 const BlockList = ({ items }: BlockChildrenProps) => {
   return (
-    <div className="q-block-list">
+    <div className="qx-block-list">
       {items.map((item, index) => (
         <div key={index}>
           {item.type === '$ref' ? (
