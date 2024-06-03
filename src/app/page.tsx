@@ -3,11 +3,9 @@ export default async function Home() {
     <main>
       <Contents />
     </main>
-  );
+  )
 }
 
 async function Contents() {
-  return (
-    <h1>study(math) =&gt; practice(code)</h1>
-  )
+  return <h1>study(math) =&gt; practice(code)</h1>
 }

@@ -1,5 +1,4 @@
 {
-  "id": "d3VzhVvhg3PH8NOd75yPd",
   "name": "parser-fixture-1",
   "type": "document",
   "body": "",
@@ -47,7 +46,7 @@
     },
     {
       "type": "text",
-      "id": "6655d9a7-ad27-47b6-8cf8-60b9c44c9b96",
+      "key": "6655d9a7-ad27-47b6-8cf8-60b9c44c9b96",
       "props": {},
       "body": "",
       "children": [],
@@ -60,7 +59,7 @@
       "children": [
         {
           "type": "text",
-          "id": "663c7ffe-f293-4f38-8ec1-7bbf788d14f5",
+          "key": "663c7ffe-f293-4f38-8ec1-7bbf788d14f5",
           "props": {},
           "body": "Section A",
           "children": [
@@ -76,7 +75,7 @@
         },
         {
           "type": "text",
-          "id": "665570ad-0bb7-46d5-8563-6d238cfb256a",
+          "key": "665570ad-0bb7-46d5-8563-6d238cfb256a",
           "props": {},
           "body": "Section B",
           "children": [
@@ -106,28 +105,48 @@
           "refs": []
         }
       ],
-      "refs": []
+      "refs": [
+        {
+          "type": "$ref",
+          "key": "663c7ffe-f293-4f38-8ec1-7bbf788d14f5"
+        }
+      ]
     },
     {
       "type": "text",
       "props": {},
       "body": "((663c7ffe-f293-4f38-8ec1-7bbf788d14f5)) 引用",
       "children": [],
-      "refs": []
+      "refs": [
+        {
+          "type": "$ref",
+          "key": "663c7ffe-f293-4f38-8ec1-7bbf788d14f5"
+        }
+      ]
     },
     {
       "type": "text",
       "props": {},
       "body": "{{embed ((665570ad-0bb7-46d5-8563-6d238cfb256a))}}",
       "children": [],
-      "refs": []
+      "refs": [
+        {
+          "type": "$ref",
+          "key": "665570ad-0bb7-46d5-8563-6d238cfb256a"
+        }
+      ]
     },
     {
       "type": "text",
       "props": {},
       "body": "Empty ((6655d9a7-ad27-47b6-8cf8-60b9c44c9b96))",
       "children": [],
-      "refs": []
+      "refs": [
+        {
+          "type": "$ref",
+          "key": "6655d9a7-ad27-47b6-8cf8-60b9c44c9b96"
+        }
+      ]
     },
     {
       "type": "text",
@@ -142,10 +161,5 @@
       "refs": []
     }
   ],
-  "refs": [
-    {
-      "type": "$ref",
-      "id": "6655d9a7-ad27-47b6-8cf8-60b9c44c9b96"
-    }
-  ]
+  "refs": []
 }

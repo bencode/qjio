@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { marked } from 'marked'
 import { CreateKnexConfig, Knex, createKnex } from '@/utils/knex'
 import { config } from '@/config/app'
 import { Block, BlockRef } from '@/core/types'
@@ -7,8 +8,14 @@ const loadBlockMemo = cache(loadBlock)
 
 const knexRef = { current: null as Knex | null }
 
+type Dict = Record<string, unknown>
+
 export default async function Page({ params }: { params: { slug: string } }) {
-  return <BlockRender name={params.slug} />
+  return (
+    <div className="container">
+      <BlockRender name={params.slug} />
+    </div>
+  )
 }
 
 export type BlockRenderProps = {
@@ -30,8 +37,9 @@ type BlockComponentProps = {
 
 const BlockComponent = ({ block }: BlockComponentProps) => {
   return (
-    <div>
+    <div className="q-block">
       {block.body ? <BlockBody value={block.body as string} /> : null}
+      {Object.keys(block.props).length > 0 ? <BlockProps value={block.props} /> : null}
       {block.children.length > 0 ? <BlockList items={block.children} /> : null}
     </div>
   )
@@ -51,7 +59,33 @@ type BlockBodyProps = {
 }
 
 const BlockBody = ({ value }: BlockBodyProps) => {
-  return <div>{value}</div>
+  const html = marked.parse(value as string)
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+type BlockPropsProps = {
+  value: Dict
+}
+const BlockProps = ({ value: props }: BlockPropsProps) => {
+  const names = Object.keys(props)
+  const renderProp = (value: unknown) => {
+    if (typeof value === 'object') {
+      return <dd className="object">{JSON.stringify(value)}</dd>
+    }
+    return <div>{`${value}`}</div>
+  }
+  return (
+    <ul className="q-block-props">
+      {names.map((name, index) => (
+        <li className="q-block-prop">
+          <dl>
+            <dt>{name}:</dt>
+            {renderProp(props[name])}
+          </dl>
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 type BlockChildrenProps = {
@@ -60,17 +94,17 @@ type BlockChildrenProps = {
 
 const BlockList = ({ items }: BlockChildrenProps) => {
   return (
-    <ul>
+    <div className="q-block-list">
       {items.map((item, index) => (
-        <li key={index}>
+        <div key={index}>
           {item.type === '$ref' ? (
             <BlockRefComponent block={item as BlockRef} />
           ) : (
             <BlockComponent block={item as Block} />
           )}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   )
 }
 

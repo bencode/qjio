@@ -7,7 +7,6 @@ title:: 第一次探索WebGPU
 	- [hello-webgl](https://codepen.io/bencode/pen/QWPBvKg) #[[Example]]
 	  id:: 6629243b-9def-4c3e-b6f6-64e2d1791154
 	- ### 核心概念
-	  collapsed:: true
 		- #[[GPT]]
 		- 在WebGL中的核心概念主要涵盖了用于在网页上进行3D渲染的一系列技术和方法。这些概念包括：
 		- **WebGL上下文**：这是使用WebGL的起点，需要从HTML的元素获取WebGL上下文。它提供了绘图的功能和渲染的控制。
@@ -26,11 +25,9 @@ title:: 第一次探索WebGPU
 		  通过这些核心概念的协同工作，WebGL能够在网页浏览器中创建复杂的3D图形和动画效果，从而为用户提供丰富和互动的视觉体验。
 	- REF: ((6629243b-9def-4c3e-b6f6-64e2d1791154))
 	- ### 特点
-	  collapsed:: true
 		- C like API
 		- Shading Language (GLSL)
 	- ### 参考资源
-	  collapsed:: true
 		- [MDN WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 		- [WebGL Fundanmentals](https://webglfundamentals.org/)
 - ## WebGL vs WebGPU

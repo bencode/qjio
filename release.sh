@@ -5,7 +5,7 @@ set -e
 name=$(jq -r '.name' ./package.json)
 version=$(jq -r '.version' ./package.json)
 revision=$(git rev-parse --verify HEAD --short)
-namespace="registry.qijun.io"
+namespace="registry.ffcp.io"
 path="${namespace}/${name}"
 tag="$version-$revision"
 target="$path:$tag"

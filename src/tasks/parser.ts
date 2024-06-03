@@ -26,12 +26,11 @@ export function Parser() {
   const parse = (body: string, opts: ParseOptions): Block => {
     const md = markdown()
     const nodes = md.parse(body, {})
-
     if (nodes.length > 0) {
       return parseDocBlock(nodes, { name: opts.name })
     }
 
-    const empty: Block= {
+    const empty: Block = {
       key: undefined,
       name: opts.name,
       type: 'document',
@@ -57,12 +56,12 @@ function parseDocBlock(nodes: Node[], opts: { name: string }) {
   const children = lis.map(li => parseBlock(li, 1)).filter(v => v)
   const block: Block = {
     key: undefined,
-    name: props.name as string ?? opts.name,
+    name: (props.name as string) ?? opts.name,
     type: 'document',
     body: '',
     props,
     children,
-    refs: []
+    refs: [],
   }
   return block
 }
@@ -85,29 +84,45 @@ function parseBlockProps(nodes: Node[], level: number) {
 function parseBlock(nodes: Node[], level: number) {
   const ctx = {
     names: new Set<string>(),
-    keys: new Set<string>()
+    keys: new Set<string>(),
   }
-  const bodyNodes = findEncludeNode(nodes, 'paragraph', level + 1)
-  const { body, props: allProps } = bodyNodes ? parseBlockContent(bodyNodes, level + 1, ctx) : { body: '', props: {} }
+  const bodyNodes =
+    findEncludeNode(nodes, 'heading', level + 1) || findEncludeNode(nodes, 'paragraph', level + 1)
+  const { body, props: allProps } = bodyNodes
+    ? parseBlockContent(bodyNodes, level + 1, ctx)
+    : { body: '', props: {} }
   const { type, id, ...props } = allProps
   const lis = findEncludeNodeGroup(nodes, 'list_item', level + 2)
   const children = lis.map(li => parseBlock(li, level + 2)).filter(v => v)
-
+  const nextBody = bodyNodes ? wrapBody(bodyNodes[0], body) : body
   const block: Block = {
     type: (type || 'text') as string,
     key: id as string,
     // name: name as string,
     props,
-    body,
+    body: nextBody,
     children,
-    refs: createRefs(ctx)
+    refs: createRefs(ctx),
   }
 
   return block
 }
 
+function wrapBody(node: Node, body: string) {
+  const tpls: Record<string, string> = {
+    h1: '#',
+    h2: '##',
+    h3: '###',
+    h4: '####',
+    h5: '#####',
+  }
+  const tpl = tpls[node.tag]
+  return tpl ? `${tpl} ${body}` : body
+}
+
 // paragraph
 function parseBlockContent(nodes: Node[], _level: number, ctx: ParserContext) {
+  const tag = nodes[0].tag
   const inline = findChildNode(nodes, 'inline')
   const refs = parseRefs(inline?.content || '')
   refs.forEach(ref => {
