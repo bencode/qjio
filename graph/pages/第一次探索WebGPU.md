@@ -31,6 +31,7 @@ title:: 第一次探索WebGPU
 		- [MDN WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 		- [WebGL Fundanmentals](https://webglfundamentals.org/)
 - ## WebGL vs WebGPU
+  collapsed:: true
 	- WebGL历史
 		- OpenGL 桌面版 (1993)
 		- WebGL 1.0 (2011) 基于 OpenGL ES 2.0
@@ -52,6 +53,7 @@ title:: 第一次探索WebGPU
 		- #[[Reference]] [why-not-webgl](https://gpuweb.github.io/gpuweb/explainer/#why-not-webgl3)
 	- 另一份参考文档： [webgl-vs-webgpu](https://aircada.com/webgl-vs-webgpu/) #[[Reference]]
 - ## 一个最简WebGPU示例
+  collapsed:: true
 	- [webgpu-starter](https://codepen.io/bencode/pen/JjVBNOq?editors=1010) #[[Example]]
 	- ### 核心概念
 		- #[[GPT]]
@@ -79,6 +81,7 @@ title:: 第一次探索WebGPU
 			- 负责提交和执行命令缓冲区的队列。这些队列处理命令的执行，如渲染和计算操作。
 		- 这些核心概念共同定义了 WebGPU 的工作方式，提供了一套全面的工具，以支持复杂的图形渲染和计算任务。通过这些工具，开发者可以利用 GPU 的强大能力，创建高性能的 Web 应用和游戏。
 - ## 如何学习
+  collapsed:: true
 	- ### 教程和示例
 		- 入门学习教程：[您的第一个WebGPU应用](https://codelabs.developers.google.com/your-first-webgpu-app?hl=zh-cn#4) ，我只跟到[第5步](https://stackblitz.com/edit/stackblitz-starters-3hhhwf?file=s02.js)；直接跳到最后一步: [webgpu-conway](https://codepen.io/bencode/pen/qBwymVz)。
 		- 跟着示例学习： [WebGPU-Step-By-Step](https://github.com/jack1232/WebGPU-Step-By-Step)

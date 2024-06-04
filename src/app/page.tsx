@@ -1,3 +1,5 @@
+import { BlockRender } from '@/widgets/block-render'
+
 export default async function Home() {
   return (
     <main>
@@ -7,5 +9,10 @@ export default async function Home() {
 }
 
 async function Contents() {
-  return <h1>study(math) =&gt; practice(code)</h1>
+  return (
+    <div>
+      <h1>study(math) =&gt; practice(code)</h1>
+      <BlockRender name="contents" />
+    </div>
+  )
 }
