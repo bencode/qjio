@@ -6,7 +6,7 @@ export type Block = {
   name?: string
   title?: string
   props: Record<string, unknown>
-  body: string
+  body?: string
   children: (Block | BlockRef)[]
   refs: BlockRef[]
 }
