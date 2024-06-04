@@ -10,7 +10,7 @@ export default async function Home() {
 
 async function Contents() {
   return (
-    <div>
+    <div className="container mx-auto">
       <h1>study(math) =&gt; practice(code)</h1>
       <BlockRender name="contents" />
     </div>

@@ -1,6 +1,6 @@
 import { cache } from 'react'
 import { marked } from 'marked'
-import type { Block, BlockRef } from '@/core/types'
+import type { Dict, Block, BlockRef } from '@/core/types'
 import { getKnex } from '@/core/knex'
 
 const loadBlockMemo = cache(loadBlock)
@@ -49,8 +49,13 @@ type BlockBodyProps = {
   value: string
 }
 
-const BlockBody = ({ value }: BlockBodyProps) => {
-  const html = marked.parse(value as string)
+const BlockBody = async ({ value }: BlockBodyProps) => {
+  const refs = parseBodyRefs(value)
+  const nameBlocks = refs.nameRefs?.length > 0 ? await loadNameBlocks(refs.nameRefs) : []
+  const idBlocks = refs.idRefs?.length > 0 ? await loadIdBlocks(refs.idRefs) : []
+  const md = processBody(nameBlocks, idBlocks, value)
+  console.log(md)
+  const html = marked.parse(md)
   return (
     <div className="prose prose-sky max-w-none">
       <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -120,4 +125,50 @@ async function loadBlock(key: string | undefined, name: string | undefined) {
   const where = key ? { key } : { name: name || 'not-found' }
   const list = await knex('blocks').where(where).limit(1)
   return list.length > 0 ? (list[0] as Block) : null
+}
+
+async function loadNameBlocks(names: string[]) {
+  const knex = getKnex()
+  const list = await knex('blocks')
+    .select(['name', 'title'])
+    .whereIn('title', names)
+    .orWhereIn('name', names)
+  return list as NameBlockBrief[]
+}
+
+async function loadIdBlocks(ids: string[]) {
+  const knex = getKnex()
+  const list = await knex('blocks').select(['key', 'title']).whereIn('key', ids)
+  return list as IdBlockBrief[]
+}
+
+function parseBodyRefs(body: string) {
+  const reName = /\[\[([^\]]+)\]\]/g
+  const reId = /\(\(([^\)]+)\)\)/g
+  const nameGroups = body.matchAll(reName)
+  const nameRefs = Array.from(nameGroups).map(v => v[1])
+  const idGroups = body.matchAll(reId)
+  const idRefs = Array.from(idGroups).map(v => v[1])
+  return { nameRefs, idRefs }
+}
+
+type NameBlockBrief = {
+  name: string
+  title: string
+}
+
+type IdBlockBrief = {
+  key: string
+  title: string
+}
+
+function processBody(nameBlocks: NameBlockBrief[], _idBlocks: IdBlockBrief[], md: string) {
+  const reName = /(#?)\[\[([^\]]+)\]\]/g
+  const next = md.replace(reName, (_: unknown, mark: string, title: string) => {
+    const block = nameBlocks.find(v => v.title === title)
+    const name = block ? block.name : title
+    const url = `/pages/${name}`
+    return `[${mark}\\[\\[${title}\\]\\]](${url})`
+  })
+  return next
 }

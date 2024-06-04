@@ -54,12 +54,16 @@ function parseDocBlock(nodes: Node[], opts: { name: string }) {
   const props = parseBlockProps(nodes, 0)
   const lis = findEncludeNodeGroup(nodes, 'list_item', 1)
   const children = lis.map(li => parseBlock(li, 1)).filter(v => v)
+  const { name, ...extraProps } = props
+  const blockName = name ? (name as string) : opts.name
+  const title = name ? opts.name : undefined
   const block: Block = {
     key: undefined,
-    name: (props.name as string) ?? opts.name,
+    name: blockName,
+    title,
     type: 'document',
     body: '',
-    props,
+    props: extraProps,
     children,
     refs: [],
   }
@@ -122,7 +126,6 @@ function wrapBody(node: Node, body: string) {
 
 // paragraph
 function parseBlockContent(nodes: Node[], _level: number, ctx: ParserContext) {
-  const tag = nodes[0].tag
   const inline = findChildNode(nodes, 'inline')
   const refs = parseRefs(inline?.content || '')
   refs.forEach(ref => {
