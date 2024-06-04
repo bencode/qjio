@@ -39,7 +39,5 @@ next-env.d.ts
 cert/
 build/
 
-graph/logseq/.*
-graph/logseq/bak/
-
+graph/
 .env
