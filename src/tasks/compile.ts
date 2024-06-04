@@ -15,28 +15,29 @@ if (require.main === module) {
 async function main() {
   const files = globSync('*.md', { cwd: config.graphRoot })
   const paths = files.map(path => pathUtil.join(config.graphRoot, path))
-  const parser  = Parser()
+  const parser = Parser()
 
   const opts = {
     client: 'pg',
-    debug: true,
+    debug: !!process.env.DEBUG,
     ...config.db,
   } as CreateKnexConfig
   await withKnex(opts, async knex => {
     for (const path of paths) {
+      global.console.debug('compile file: %s', path)
       await compileFile(knex, parser, path)
     }
   })
-
 }
 
 async function compileFile(knex: Knex, parser: IParser, path: string) {
   const body = fs.readFileSync(path, 'utf-8')
+  const processedBody = precompile(body)
   const name = pathUtil.basename(path, pathUtil.extname(path))
-  const root = parser.parse(body, { name })
+  const root = parser.parse(processedBody, { name })
   const blocks = flattenNode(root)
   for (const block of blocks) {
-    global.console.debug('create block: %o', block)
+    // global.console.debug('create block: %o', block)
     const where = block.name ? { name: block.name } : { key: block.key }
     const list = await knex('blocks').where(where).limit(1)
     const data = {
@@ -75,4 +76,14 @@ function flattenNode(root: Block) {
   }
   tr(root)
   return list
+}
+
+function precompile(body: string) {
+  const reImage = /!\[([^\]]+)\]\(([^\)]+)\)/g
+  const reRev = /^\.\.\//
+  const next = body.replace(reImage, (_: unknown, title: string, url: string) => {
+    const assetUrl = `${config.assetHost}/${url.replace(reRev, '')}`
+    return `![title](${assetUrl})`
+  })
+  return next
 }

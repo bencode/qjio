@@ -12,7 +12,7 @@ type Dict = Record<string, unknown>
 
 export default async function Page({ params }: { params: { slug: string } }) {
   return (
-    <div className="qx-page container mx-auto p-4">
+    <div className="container mx-auto p-4">
       <BlockRender name={params.slug} />
     </div>
   )
@@ -29,7 +29,7 @@ const BlockRender = async ({ id, name }: BlockRenderProps) => {
     return <NotFound id={id} name={name} />
   }
   return (
-    <article className="prose prose-sky max-w-none">
+    <article>
       <BlockComponent block={block} />
     </article>
   )
@@ -41,7 +41,7 @@ type BlockComponentProps = {
 
 const BlockComponent = ({ block }: BlockComponentProps) => {
   return (
-    <div className="qx-block">
+    <div>
       {block.body ? <BlockBody value={block.body as string} /> : null}
       {Object.keys(block.props).length > 0 ? <BlockProps value={block.props} /> : null}
       {block.children.length > 0 ? <BlockList items={block.children} /> : null}
@@ -64,7 +64,11 @@ type BlockBodyProps = {
 
 const BlockBody = ({ value }: BlockBodyProps) => {
   const html = marked.parse(value as string)
-  return <div dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <div className="prose prose-sky max-w-none">
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
+  )
 }
 
 type BlockPropsProps = {
@@ -74,17 +78,17 @@ const BlockProps = ({ value: props }: BlockPropsProps) => {
   const names = Object.keys(props)
   const renderProp = (value: unknown) => {
     if (typeof value === 'object') {
-      return <dd>{JSON.stringify(value)}</dd>
+      return JSON.stringify(value)
     }
-    return <div>{`${value}`}</div>
+    return `${value}`
   }
   return (
-    <ul className="qx-block-props">
+    <ul className="rounded bg-slate-100 px-4 py-2">
       {names.map((name, index) => (
         <li key={index}>
-          <dl>
+          <dl className="flex flex-row">
             <dt>{name}:</dt>
-            {renderProp(props[name])}
+            <dd className="ml-2">{renderProp(props[name])}</dd>
           </dl>
         </li>
       ))}
@@ -98,7 +102,7 @@ type BlockChildrenProps = {
 
 const BlockList = ({ items }: BlockChildrenProps) => {
   return (
-    <div className="qx-block-list">
+    <div>
       {items.map((item, index) => (
         <div key={index}>
           {item.type === '$ref' ? (
