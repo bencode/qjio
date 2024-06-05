@@ -1,5 +1,7 @@
 import { BlockRender } from '@/widgets/block-render'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   return (
     <main>
