@@ -13,9 +13,9 @@ export default async function Home() {
 async function Contents() {
   return (
     <div className="container mx-auto">
-      <div className="prose">
-        <pre>() =&gt; study(math) =&gt; practice(code)</pre>
-      </div>
+      <h1>
+        <code>() =&gt; study(math) =&gt; practice(code)</code>
+      </h1>
       <BlockRender name="contents" />
     </div>
   )
