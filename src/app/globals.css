@@ -29,9 +29,3 @@ body {
 .prose a {
   @apply no-underline;
 }
-
-.qx-split {
-  >.gutter {
-    @apply sticky top-[0] h-full bg-slate-200 hover:bg-sky-400;
-  }
-}

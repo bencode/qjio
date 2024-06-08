@@ -16,7 +16,7 @@ export const BlockRender = async ({ id, name }: BlockRenderProps) => {
     return <NotFound id={id} name={name} />
   }
   return (
-    <article>
+    <article className="px-2 py-4">
       <BlockComponent block={block} />
     </article>
   )
@@ -57,7 +57,7 @@ const BlockBody = async ({ value }: BlockBodyProps) => {
   console.log(md)
   const html = marked.parse(md)
   return (
-    <div className="prose prose-sky max-w-none">
+    <div className="prose prose-blue max-w-none">
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   )
