@@ -38,7 +38,7 @@ const BlockComponent = ({ block }: BlockComponentProps) => {
     <div>
       <Render block={block} />
       {block.children.length > 0 ? (
-        <div className="pl-4">
+        <div className="md:pl-4">
           <BlockList items={block.children} />
         </div>
       ) : null}
