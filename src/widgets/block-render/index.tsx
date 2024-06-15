@@ -2,6 +2,7 @@ import { cache } from 'react'
 import { marked } from 'marked'
 import type { Dict, Block, BlockRef } from '@/core/types'
 import { getKnex } from '@/core/knex'
+import { style } from './style'
 
 const loadBlockMemo = cache(loadBlock)
 
@@ -17,11 +18,11 @@ export const BlockRender = async ({ id, name }: BlockRenderProps) => {
   }
   return (
     <article className="px-2 py-4">
+      <h2 className="text-3xl mb-4">{block.title}</h2>
       <BlockComponent block={block} />
     </article>
   )
 }
-
 type BlockComponentProps = {
   block: Block
 }
@@ -31,7 +32,11 @@ const BlockComponent = ({ block }: BlockComponentProps) => {
     <div>
       {block.body ? <BlockBody value={block.body as string} /> : null}
       {Object.keys(block.props).length > 0 ? <BlockProps value={block.props} /> : null}
-      {block.children.length > 0 ? <BlockList items={block.children} /> : null}
+      {block.children.length > 0 ? (
+        <div className="pl-4">
+          <BlockList items={block.children} />
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -54,10 +59,9 @@ const BlockBody = async ({ value }: BlockBodyProps) => {
   const nameBlocks = refs.nameRefs?.length > 0 ? await loadNameBlocks(refs.nameRefs) : []
   const idBlocks = refs.idRefs?.length > 0 ? await loadIdBlocks(refs.idRefs) : []
   const md = processBody(nameBlocks, idBlocks, value)
-  console.log(md)
   const html = marked.parse(md)
   return (
-    <div className="prose prose-blue max-w-none">
+    <div className={style.blockBody}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   )

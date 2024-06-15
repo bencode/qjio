@@ -7,6 +7,7 @@ const config: Config = {
     './src/widgets/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+
   theme: {
     extend: {
       backgroundImage: {
@@ -15,6 +16,8 @@ const config: Config = {
       },
     },
   },
+
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 }
+
 export default config
