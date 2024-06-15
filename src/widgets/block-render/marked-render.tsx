@@ -1,7 +1,6 @@
-import { marked } from 'marked'
 import { Block, Dict } from '@/core/types'
 import { getKnex } from '@/core/knex'
-import { style } from './style'
+import { MarkedBody } from '@/components/marked-body'
 
 export type MarkedRenderProps = {
   block: Block
@@ -25,12 +24,7 @@ const BlockBody = async ({ value }: BlockBodyProps) => {
   const nameBlocks = refs.nameRefs?.length > 0 ? await loadNameBlocks(refs.nameRefs) : []
   const idBlocks = refs.idRefs?.length > 0 ? await loadIdBlocks(refs.idRefs) : []
   const md = processBody(nameBlocks, idBlocks, value)
-  const html = marked.parse(md)
-  return (
-    <div className={style.blockBody}>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  )
+  return <MarkedBody value={md} />
 }
 
 type BlockPropsProps = {
