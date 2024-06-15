@@ -1,3 +1,5 @@
+import { CodePenScript } from '@/components/code-pen'
+
 type LayoutProps = {
   sider: React.ReactElement
   main: React.ReactElement
@@ -10,6 +12,7 @@ export const Layout = ({ sider, main, extra }: LayoutProps) => {
       <div className="sticky top-[0] bg-slate-50 w-64 hidden md:flex">{sider}</div>
       <div className="flex-1">{main}</div>
       <div className="sticky top-[0] bg-slate-50 w-64 hidden md:flex">{extra}</div>
+      <CodePenScript />
     </div>
   )
 }
