@@ -20,9 +20,7 @@ export const CodepenRender = ({ block }: CodepenRenderProps) => {
   const slug = slugMatch[1]
   return (
     <div>
-      <div className="md:hidden">
-        <MarkedBody value={block.body!} />
-      </div>
+      <MarkedBody value={block.body!} />
       <div className="hidden md:block">
         <div
           className="codepen"

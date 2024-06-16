@@ -6,12 +6,10 @@ type LayoutProps = {
   extra: React.ReactElement
 }
 
-export const Layout = ({ sider, main, extra }: LayoutProps) => {
+export const Layout = ({ sider: _sider, main, extra: _extra }: LayoutProps) => {
   return (
-    <div className="flex h-screen overflow-auto">
-      <div className="sticky top-[0] bg-slate-50 w-64 hidden md:flex">{sider}</div>
+    <div className="container mx-auto h-screen">
       <div className="flex-1">{main}</div>
-      <div className="sticky top-[0] bg-slate-50 w-64 hidden md:flex">{extra}</div>
       <CodePenScript />
     </div>
   )

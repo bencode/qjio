@@ -3,6 +3,7 @@ import type { Block, BlockRef } from '@/core/types'
 import { getKnex } from '@/core/knex'
 import { MarkedRender } from './marked-render'
 import { CodepenRender } from './codepen-render'
+import { BlockProps } from './props'
 
 const loadBlockMemo = cache(loadBlock)
 
@@ -19,6 +20,7 @@ export const BlockRender = async ({ id, name }: BlockRenderProps) => {
   return (
     <article className="px-2 py-4">
       <h2 className="text-3xl mb-4">{block.title}</h2>
+      <BlockProps block={block} />
       <BlockComponent block={block} />
     </article>
   )
