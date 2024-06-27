@@ -21,7 +21,7 @@ EOF
 )
 
 # Extract the version number
-VERSION=$(echo "$OUTPUT" | grep -oP '(?<=registry.qijun.io/qjio:)\S+')
+VERSION=$(echo "$OUTPUT" | grep -o 'registry.qijun.io/qjio:[^ ]*' | cut -d':' -f2)
 
 # Check if the version number was successfully extracted
 if [ -z "$VERSION" ]; then
