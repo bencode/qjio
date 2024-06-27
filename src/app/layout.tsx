@@ -1,10 +1,24 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-export const metadata: Metadata = {
-  title: '学(数学)=>习(代码)',
-  description: 'study(math) => practice(code)',
-  keywords: ['functional programming', 'mathematics', 'combinatorics', 'programming languages'],
+type Props = {
+  params: Record<string, string>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const title = '学(数学)=>习(代码)'
+  const description = 'study(math) => practice(code)'
+  const keywords = [
+    'functional programming',
+    'mathematics',
+    'combinatorics',
+    'programming languages',
+  ]
+  return {
+    title,
+    description,
+    keywords,
+  }
 }
 
 export default function RootLayout({
