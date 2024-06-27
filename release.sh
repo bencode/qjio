@@ -3,7 +3,7 @@
 # Remote server and directory
 REMOTE_SERVER="root@qijun.io"
 REMOTE_REPO_DIR="~/repos/qjio"
-LOCAL_V82_DIR="~/v82"
+LOCAL_V82_DIR="$HOME/v82"
 ENV_FILE="$LOCAL_V82_DIR/.env"
 
 # SSH into the remote server and execute commands
