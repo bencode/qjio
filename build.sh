@@ -2,8 +2,8 @@
 set -e
 
 # Use jq to parse package.json
-name=$(jq -r '.name' ../package.json)
-version=$(jq -r '.version' ../package.json)
+name=$(jq -r '.name' ./package.json)
+version=$(jq -r '.version' ./package.json)
 revision=$(git rev-parse --verify HEAD --short)
 namespace="registry.qijun.io"
 path="${namespace}/${name}"
