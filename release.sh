@@ -3,8 +3,6 @@
 # Remote server and directory
 REMOTE_SERVER="root@qijun.io"
 REMOTE_REPO_DIR="~/repos/qjio"
-LOCAL_V82_DIR="$HOME/v82"
-ENV_FILE="$LOCAL_V82_DIR/.env"
 
 # SSH into the remote server and execute commands
 ssh $REMOTE_SERVER << 'EOF'
@@ -32,11 +30,17 @@ fi
 # Print the extracted version number
 echo "Extracted version number: $VERSION"
 
+# Get the local home directory
+LOCAL_HOME_DIR=$(eval echo ~)
+
+# Define the local .env file path
+ENV_FILE="$LOCAL_HOME_DIR/v82/.env"
+
 # Replace the TAG value in the local .env file
-sed -i.bak "s/^TAG=.*/TAG=$VERSION/" $ENV_FILE
+sed -i.bak "s/^TAG=.*/TAG=$VERSION/" "$ENV_FILE"
 
 # Check if the replacement was successful
-if grep -q "TAG=$VERSION" $ENV_FILE; then
+if grep -q "TAG=$VERSION" "$ENV_FILE"; then
   echo "Successfully updated TAG in .env file"
 else
   echo "Failed to update TAG in .env file"
@@ -44,7 +48,7 @@ else
 fi
 
 # Restart Docker Compose services
-cd $LOCAL_V82_DIR
+cd "$LOCAL_HOME_DIR/v82"
 docker compose up -d
 
 echo "Docker Compose restart completed"
