@@ -2,11 +2,21 @@ import { cache } from 'react'
 import type { Block, BlockRef } from '@/core/types'
 import { getKnex } from '@/core/knex'
 import { MarkedRender } from './marked-render'
+import { CodeRender } from './code-render'
 import { CodepenRender } from './codepen-render'
-import { RunkitRender } from './runkit'
+import { RunkitRender } from './runkit-render'
 import { BlockProps } from './props'
 
 const loadBlockMemo = cache(loadBlock)
+
+const TypeRenders = {
+  code: CodeRender,
+} as Record<string, React.ComponentType<any>>
+
+const PropRenders = {
+  codepen: CodepenRender,
+  runkit: RunkitRender,
+} as Record<string, React.ComponentType<any>>
 
 export type BlockRenderProps = {
   id?: string
@@ -26,18 +36,13 @@ export const BlockRender = async ({ id, name }: BlockRenderProps) => {
     </article>
   )
 }
+
 type BlockComponentProps = {
   block: Block
 }
 
-const Renders = {
-  codepen: CodepenRender,
-  marked: MarkedRender,
-  runkit: RunkitRender,
-} as Record<string, React.ElementType>
-
 const BlockComponent = ({ block }: BlockComponentProps) => {
-  const Render = Renders[(block.props.render as string) || 'marked'] ?? MarkedRender
+  const Render = getRender(block)
   return (
     <div>
       <Render block={block} />
@@ -96,4 +101,12 @@ async function loadBlock(key: string | undefined, name: string | undefined) {
   const where = key ? { key } : { name: name || 'not-found' }
   const list = await knex('blocks').where(where).limit(1)
   return list.length > 0 ? (list[0] as Block) : null
+}
+
+function getRender(block: Block) {
+  const render = block.props.render
+  if (render) {
+    return PropRenders[render as string] || MarkedRender
+  }
+  return TypeRenders[block.type] || MarkedRender
 }
