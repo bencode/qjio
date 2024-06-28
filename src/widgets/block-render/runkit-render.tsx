@@ -33,7 +33,7 @@ export const RunkitRender = ({ block }: RunkitRenderProps) => {
 
   return (
     <div>
-      <div ref={elRef}></div>
+      <div ref={elRef} />
     </div>
   )
 }
