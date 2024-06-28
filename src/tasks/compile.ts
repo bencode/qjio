@@ -9,12 +9,13 @@ import type { Block, BlockRef } from '../core/types'
 import { IParser, Parser } from './parser'
 
 if (require.main === module) {
-  main()
+  const filename = process.argv.slice(2)[0] || '*'
+  const files = globSync(`${filename}.md`, { cwd: config.graphRoot })
+  const paths = files.map(path => pathUtil.join(config.graphRoot, path))
+  run(paths)
 }
 
-async function main() {
-  const files = globSync('*.md', { cwd: config.graphRoot })
-  const paths = files.map(path => pathUtil.join(config.graphRoot, path))
+async function run(paths: string[]) {
   const parser = Parser()
 
   const opts = {

@@ -3,6 +3,7 @@ import type { Block, BlockRef } from '@/core/types'
 import { getKnex } from '@/core/knex'
 import { MarkedRender } from './marked-render'
 import { CodepenRender } from './codepen-render'
+import { RunkitRender } from './runkit'
 import { BlockProps } from './props'
 
 const loadBlockMemo = cache(loadBlock)
@@ -32,6 +33,7 @@ type BlockComponentProps = {
 const Renders = {
   codepen: CodepenRender,
   marked: MarkedRender,
+  runkit: RunkitRender,
 } as Record<string, React.ElementType>
 
 const BlockComponent = ({ block }: BlockComponentProps) => {
