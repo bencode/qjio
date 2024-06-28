@@ -24,6 +24,9 @@ export const RunkitRender = ({ block }: RunkitRenderProps) => {
       RunKit.createNotebook({
         element: elRef.current,
         source: block.body,
+        gutterStyle: 'inside',
+        nodeVersion: '18.x.x',
+        tabSize: 2,
       })
     }
     load().catch(e => {
