@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
-      <body className="bg-sky-100">{children}</body>
+      <body className="bg-sky-50">{children}</body>
     </html>
   )
 }
