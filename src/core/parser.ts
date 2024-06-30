@@ -1,6 +1,6 @@
 // import createDebug from 'debug'
 import markdown from 'markdown-it'
-import type { Block, BlockRef } from '../core/types'
+import type { Block, BlockRef } from './types'
 import { parseValue, parseRefs } from './value'
 
 // const debug = createDebug('parser')

@@ -6,7 +6,7 @@ import type { CreateKnexConfig } from '../utils/knex'
 import { withKnex, Knex } from '../utils/knex'
 import { config } from '../config/app'
 import type { Block, BlockRef } from '../core/types'
-import { IParser, Parser } from './parser'
+import { IParser, Parser } from '../core/parser'
 
 if (require.main === module) {
   const filename = process.argv.slice(2)[0] || '*'
