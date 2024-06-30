@@ -1,4 +1,8 @@
+import { cache } from 'react'
 import { BlockRender } from '@/widgets/block-render'
+import { loadBlock } from '@/core/loader'
+
+const loadBlockMemo = cache(loadBlock)
 
 export const dynamic = 'force-dynamic'
 
@@ -16,7 +20,7 @@ async function Contents() {
       <h1>
         <code>() =&gt; study(math) =&gt; practice(code)</code>
       </h1>
-      <BlockRender name="contents" />
+      <BlockRender name="contents" loader={loadBlockMemo} />
     </div>
   )
 }

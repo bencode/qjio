@@ -1,13 +1,9 @@
-import { cache } from 'react'
 import type { Block, BlockRef } from '@/core/types'
-import { getKnex } from '@/core/knex'
 import { MarkedRender } from './marked-render'
 import { CodeRender } from './code-render'
 import { CodepenRender } from './codepen-render'
 import { RunkitRender } from './runkit-render'
 import { BlockProps } from './props'
-
-const loadBlockMemo = cache(loadBlock)
 
 const TypeRenders = {
   code: CodeRender,
@@ -21,10 +17,13 @@ const PropRenders = {
 export type BlockRenderProps = {
   id?: string
   name?: string
+  loader: BlockLoader
 }
 
-export const BlockRender = async ({ id, name }: BlockRenderProps) => {
-  const block = await loadBlockMemo(id, name)
+type BlockLoader = (id: string | undefined, name: string | undefined) => Promise<Block | null>
+
+export const BlockRender = async ({ id, name, loader }: BlockRenderProps) => {
+  const block = await loader(id, name)
   if (!block) {
     return <NotFound id={id} name={name} />
   }
@@ -32,23 +31,24 @@ export const BlockRender = async ({ id, name }: BlockRenderProps) => {
     <article className="px-2 py-4">
       <h2 className="text-3xl mb-4">{block.title}</h2>
       <BlockProps block={block} />
-      <BlockComponent block={block} />
+      <BlockComponent block={block} loader={loader} />
     </article>
   )
 }
 
 type BlockComponentProps = {
   block: Block
+  loader: BlockLoader
 }
 
-const BlockComponent = ({ block }: BlockComponentProps) => {
+const BlockComponent = ({ block, loader }: BlockComponentProps) => {
   const Render = getRender(block)
   return (
     <div>
       <Render block={block} />
       {block.children.length > 0 ? (
         <div className="md:pl-4">
-          <BlockList items={block.children} />
+          <BlockList items={block.children} loader={loader} />
         </div>
       ) : null}
     </div>
@@ -66,17 +66,18 @@ const NotFound = ({ id, name }: NotFoundProps) => {
 
 type BlockChildrenProps = {
   items: (Block | BlockRef)[]
+  loader: BlockLoader
 }
 
-const BlockList = ({ items }: BlockChildrenProps) => {
+const BlockList = ({ items, loader }: BlockChildrenProps) => {
   return (
     <div>
       {items.map((item, index) => (
         <div key={index}>
           {item.type === '$ref' ? (
-            <BlockRefComponent block={item as BlockRef} />
+            <BlockRefComponent block={item as BlockRef} loader={loader} />
           ) : (
-            <BlockComponent block={item as Block} />
+            <BlockComponent block={item as Block} loader={loader} />
           )}
         </div>
       ))}
@@ -86,21 +87,15 @@ const BlockList = ({ items }: BlockChildrenProps) => {
 
 type BlockRefComponentProps = {
   block: BlockRef
+  loader: BlockLoader
 }
 
-const BlockRefComponent = async ({ block: ref }: BlockRefComponentProps) => {
-  const block = await loadBlockMemo(ref.key, ref.name)
+const BlockRefComponent = async ({ block: ref, loader }: BlockRefComponentProps) => {
+  const block = await loader(ref.key, ref.name)
   if (!block) {
     return <NotFound id={ref.key} name={ref.name} />
   }
-  return <BlockComponent block={block} />
-}
-
-async function loadBlock(key: string | undefined, name: string | undefined) {
-  const knex = getKnex()
-  const where = key ? { key } : { name: name || 'not-found' }
-  const list = await knex('blocks').where(where).limit(1)
-  return list.length > 0 ? (list[0] as Block) : null
+  return <BlockComponent block={block} loader={loader} />
 }
 
 function getRender(block: Block) {
