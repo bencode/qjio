@@ -38,6 +38,5 @@ next-env.d.ts
 # app
 cert/
 build/
-
-graph/
+public/graph/
 .env
