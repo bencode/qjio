@@ -3,7 +3,7 @@ import * as pathUtil from 'node:path'
 const appRoot = process.cwd()
 
 export const config = {
-  graphRoot: pathUtil.join(appRoot, 'graph/pages'),
+  graphRoot: pathUtil.join(appRoot, 'public/graph/pages'),
   assetHost: 'https://s.fmap.dev/qjio',
 
   db: {
