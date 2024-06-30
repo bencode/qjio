@@ -16,7 +16,7 @@ type PageProps = {
 
 const loadBlockMemo = cache(loadBlock)
 
-export default async function Page({ params, searchParams }: PageProps) {
+export default function Page({ params, searchParams }: PageProps) {
   const loader = searchParams.dev ? createBlockLoader(searchParams.dev) : loadBlockMemo
   const sider = <div></div>
   const main = <BlockRender name={params.slug} loader={loader} />
@@ -26,7 +26,7 @@ export default async function Page({ params, searchParams }: PageProps) {
 
 function createBlockLoader(filename: string) {
   const parser = Parser()
-  return async (id: string | undefined, name: string | undefined) => {
+  return async (_id: string | undefined, name: string | undefined) => {
     const path = pathUtil.join(config.graphRoot, `${filename}.md`)
     const body = await readFile(path, 'utf-8')
     return parser.parse(body, { name: `DEV ${name!}` })
