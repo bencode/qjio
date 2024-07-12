@@ -1,7 +1,7 @@
 import { App as Classic } from './1-classic'
 import { App as UseSuspense } from './2-use-suspense'
-import { App as StartEncapsulate } from './3-start-encapsulate'
-import { App as UnderstandEffect } from './4-effect'
+import { App as TryLoadInComponent } from './3-try-load-in-component'
+import { App as UnderstandEffect } from './4-understand-effect'
 import { App as ExtractHook } from './5-extract-hook'
 
 export const App = () => {
@@ -17,8 +17,8 @@ export const App = () => {
         <UseSuspense />
       </section>
       <section>
-        <h2>3. Start encapsulate</h2>
-        <StartEncapsulate />
+        <h2>3. Try load in component</h2>
+        <TryLoadInComponent />
       </section>
       <section>
         <h2>4. Understand effect</h2>

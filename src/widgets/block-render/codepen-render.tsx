@@ -25,7 +25,7 @@ export const CodepenRender = ({ block }: CodepenRenderProps) => {
         <div
           className="codepen"
           data-height="400"
-          data-default-tab="result"
+          data-default-tab="js,result"
           data-slug-hash={slug}
           data-pen-title={title}
           data-preview="false"

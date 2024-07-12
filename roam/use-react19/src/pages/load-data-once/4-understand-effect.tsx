@@ -11,9 +11,7 @@ export function App() {
   )
 }
 
-type ItemProps = {}
-
-const Item = ({}: ItemProps) => {
+const Item = () => {
   const [dataRes, setDataRes] = useState<Promise<number>>()
   const data = dataRes ? use(dataRes) : null
   useEffect(() => {
