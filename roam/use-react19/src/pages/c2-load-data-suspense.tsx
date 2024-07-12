@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, use } from 'react'
+import { sleep } from '../utils/lang'
 
-const sleep = (timeout: number) => new Promise(resolve => setTimeout(resolve, timeout))
+type Resource<T> = Promise<T>
 
 export function App() {
-  const [data, setData] = useState<number>()
-  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<Resource<number>>()
   useEffect(() => {
-    const init = async () => {
-      try {
-        setLoading(true)
-        const res = await loadData()
-        setData(res)
-      } finally {
-        setLoading(false)
-      }
-    }
-    init()
+    const res = loadData()
+    setData(res)
   }, [])
 
   return (
     <div>
-      {loading ? <div>Loading...</div> : null}
-      {data ? <div>{data}</div> : null}
+      <Suspense fallback={<div>Loading...</div>}>{data ? <Item data={data} /> : null}</Suspense>
     </div>
   )
+}
+
+type ItemProps = {
+  data: Resource<number>
+}
+
+const Item = ({ data: res }: ItemProps) => {
+  const data = use(res)
+  return <div>{data}</div>
 }
 
 async function loadData() {
