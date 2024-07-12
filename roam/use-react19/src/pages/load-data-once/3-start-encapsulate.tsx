@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, use } from 'react'
-import { sleep } from '../utils/lang'
+import { sleep } from '../../utils/lang'
 
 export function App() {
   return (
@@ -17,21 +17,18 @@ const Item = ({}: ItemProps) => {
   const [dataRes, setDataRes] = useState<Promise<number>>()
   const data = dataRes ? use(dataRes) : null
   useEffect(() => {
-    console.log('in item effect')
-    if (dataRes) {
-      return
-    }
+      /* console.log('in item effect') */
     const res = loadData()
     setDataRes(res)
   }, [])
 
-  console.log('in item render')
+    /* console.log('in item render') */
 
   return <div>{data}</div>
 }
 
 async function loadData() {
-  console.log('load data')
+  /* console.log('load data') */
   await sleep(1000)
   return Math.random()
 }
@@ -40,3 +37,5 @@ async function loadData() {
 // 在strict时不能正常工作
 // 组件要 resilient
 // https://overreacted.io/writing-resilient-components/
+
+// loadData 需要在Suspense的外面

@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, use } from 'react'
-import { sleep } from '../utils/lang'
+import { sleep } from '../../utils/lang'
 
 type Resource<T> = Promise<T>
 
@@ -12,11 +12,14 @@ export function App() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>{data ? <Item data={data} /> : null}</Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        {data ? <Item data={data} /> : null}
+      </Suspense>
     </div>
   )
 }
 
+// promise as first-class data (just like number, array ...)
 type ItemProps = {
   data: Resource<number>
 }
