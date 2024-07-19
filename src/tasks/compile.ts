@@ -34,7 +34,7 @@ async function run(paths: string[]) {
 async function compileFile(knex: Knex, parser: IParser, path: string) {
   const body = fs.readFileSync(path, 'utf-8')
   const processedBody = precompile(body)
-  const name = pathUtil.basename(path, pathUtil.extname(path))
+  const name = decodeURIComponent(pathUtil.basename(path, pathUtil.extname(path)))
   const root = parser.parse(processedBody, { name })
   const blocks = flattenNode(root)
   for (const block of blocks) {

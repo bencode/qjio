@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-
-const sleep = (timeout: number) => new Promise(resolve => setTimeout(resolve, timeout))
+import { sleep } from '../../utils/lang'
 
 export function App() {
   const [data, setData] = useState<number>()

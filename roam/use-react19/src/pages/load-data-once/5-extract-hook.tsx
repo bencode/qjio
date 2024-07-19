@@ -1,7 +1,5 @@
 import { useState, useEffect, Suspense, use } from 'react'
-import { sleep } from '../../utils/lang'
-
-const range = (n: number) => [...Array(n).keys()]
+import { sleep, range } from '../../utils/lang'
 
 export function App() {
   return (
