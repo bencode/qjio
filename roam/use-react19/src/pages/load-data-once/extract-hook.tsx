@@ -5,8 +5,8 @@ export function App() {
   return (
     <div>
       {range(4).map(i => (
-        <Suspense fallback={<div>Loading...</div>}>
-          <Item id={`id${i + 1}`} />
+        <Suspense key={i} fallback={<div>Loading...</div>}>
+          <Item key={i} id={`id${i + 1}`} />
         </Suspense>
       ))}
     </div>
