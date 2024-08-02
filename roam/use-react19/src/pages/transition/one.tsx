@@ -1,5 +1,6 @@
 import { useState, useTransition } from 'react'
 import { css } from '@emotion/css'
+import { range } from '../../utils/lang'
 
 export function App() {
   return (
@@ -97,8 +98,22 @@ function A() {
 }
 
 function B() {
-  block(1000)
-  return <div>I was blocked for 1000ms</div>
+  return (
+    <>
+      {range(10).map(i => (
+        <div key={i}>
+          <SlowItem index={i} />
+        </div>
+      ))}
+    </>
+  )
+}
+
+function SlowItem({ index }: { index: number }) {
+  const time = Math.round(Math.random() * 100)
+  block(time)
+  console.log('render: %s', index)
+  return <div>SlowItem: I was blocked {time}ms</div>
 }
 
 function C() {
@@ -107,6 +122,7 @@ function C() {
 
 function block(ms: number) {
   const last = Date.now()
+  // eslint-disable-next-line
   while (true) {
     const now = Date.now()
     if (now - last > ms) {
