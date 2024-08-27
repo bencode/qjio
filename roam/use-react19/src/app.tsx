@@ -3,6 +3,8 @@ import { css } from '@emotion/css'
 import { App as LoadDataOnce } from './pages/load-data-once'
 import { App as LoadDataMore } from './pages/load-data-more'
 import { App as TransitionOne } from './pages/transition/one'
+import { App as TransitionTwo} from './pages/transition/two'
+
 import './style.css'
 
 export function App() {
@@ -14,6 +16,7 @@ export function App() {
           <Route path="/load-data-once" element={<LoadDataOnce />} />
           <Route path="/load-data-more" element={<LoadDataMore />} />
           <Route path="/transition/one" element={<TransitionOne />} />
+          <Route path="/transition/two" element={<TransitionTwo />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -49,6 +52,9 @@ function Layout() {
         </li>
         <li>
           <Link to="/transition/one">useTransition: One</Link>
+        </li>
+        <li>
+          <Link to="/transition/two">useDeferredValue: Two</Link>
         </li>
       </ul>
       <div className="main">

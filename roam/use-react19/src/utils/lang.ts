@@ -5,3 +5,14 @@ export const sleep = (timeout: number) => {
 export const range = (n: number) => {
   return [...Array(n).keys()]
 }
+
+export function block(ms: number) {
+  const last = Date.now()
+  // eslint-disable-next-line
+  while (true) {
+    const now = Date.now()
+    if (now - last > ms) {
+      break
+    }
+  }
+}

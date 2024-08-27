@@ -1,6 +1,6 @@
 import { useState, useTransition } from 'react'
 import { css } from '@emotion/css'
-import { range } from '../../utils/lang'
+import { range, block } from '../../utils/lang'
 
 export function App() {
   return (
@@ -49,7 +49,13 @@ function TabApp() {
     }
   `
 
-  const setTabInTransition = (next: string) => {
+  const switchTo = (next: string) => {
+    console.log('switch to: %s', next)
+    setTab(next)
+  }
+
+  const switchToTransition = (next: string) => {
+    console.log('switch to transition: %s', next)
     startTransition(() => {
       setTab(next)
     })
@@ -62,9 +68,9 @@ function TabApp() {
         <nav>
           Navs:
           <ul>
-            <li onClick={() => setTab('a')}>A</li>
-            <li onClick={() => setTab('b')}>Slow B</li>
-            <li onClick={() => setTab('c')}>C</li>
+            <li onClick={() => switchTo('a')}>A</li>
+            <li onClick={() => switchTo('b')}>Slow B</li>
+            <li onClick={() => switchTo('c')}>C</li>
           </ul>
         </nav>
       </section>
@@ -73,9 +79,9 @@ function TabApp() {
         <nav>
           Navs:
           <ul>
-            <li onClick={() => setTabInTransition('a')}>A</li>
-            <li onClick={() => setTabInTransition('b')}>Slow B</li>
-            <li onClick={() => setTabInTransition('c')}>C</li>
+            <li onClick={() => switchTo('a')}>A</li>
+            <li onClick={() => switchToTransition('b')}>Slow B: Interuptible</li>
+            <li onClick={() => switchTo('c')}>C</li>
           </ul>
         </nav>
       </section>
@@ -94,13 +100,15 @@ function TabApp() {
 }
 
 function A() {
+  console.log('render A')
   return <div>A</div>
 }
 
 function B() {
+  console.log('render B')
   return (
     <>
-      {range(10).map(i => (
+      {range(20).map(i => (
         <div key={i}>
           <SlowItem index={i} />
         </div>
@@ -112,21 +120,10 @@ function B() {
 function SlowItem({ index }: { index: number }) {
   const time = Math.round(Math.random() * 100)
   block(time)
-  console.log('render: %s', index)
+  console.log('render SlowItem: %s', index)
   return <div>SlowItem: I was blocked {time}ms</div>
 }
 
 function C() {
   return <div>C</div>
-}
-
-function block(ms: number) {
-  const last = Date.now()
-  // eslint-disable-next-line
-  while (true) {
-    const now = Date.now()
-    if (now - last > ms) {
-      break
-    }
-  }
 }

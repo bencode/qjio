@@ -55,12 +55,11 @@ function parseDocBlock(nodes: Node[], opts: { name: string }) {
   const props = parseBlockProps(nodes, 0)
   const lis = findEncloseNodeGroup(nodes, 'list_item', 1)
   const children = lis.map(li => parseBlock(li, 1)).filter(v => v) as Block[]
-  const { name, ...extraProps } = props
-  const blockName = name ? (name as string) : opts.name
-  const title = name ? opts.name : undefined
+  const { alias, ...extraProps } = props
+  const title = alias ? (alias as string) : opts.name
   const block: Block = {
     key: undefined,
-    name: blockName,
+    name: opts.name,
     title,
     type: 'document',
     body: '',
@@ -68,7 +67,6 @@ function parseDocBlock(nodes: Node[], opts: { name: string }) {
     children,
     refs: [],
   }
-  // console.log(JSON.stringify(block, null, '  '))
   return block
 }
 
