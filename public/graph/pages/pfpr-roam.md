@@ -1,0 +1,55 @@
+- 大纲
+	- 基于场景和例子讲解
+	- 数据转换
+		- pick
+	- 函数签名
+	- 函数列表
+		- 数据转换
+			- pick, omit
+			- adjust
+			- assoc
+				- 副作用
+			- assocPath
+			- chain flatMap
+			- path
+		- 数据变换
+			- collectBy
+			- groupBy
+			- partition
+		- 逻辑处理
+			- array
+				- some, every
+			- ramda
+				- all, allPass, any, anyPass
+			- reduce
+			- transduce
+				- append
+		- 比较
+			- compartator
+		- 函数
+			- 函数类型
+				- transformer
+				- reducer
+				- transducer
+			- arity
+				- binary
+			- both
+			- compose
+			- o
+			- memorize
+			- 高阶函数
+				- partial
+		- 数据结构
+			- pair
+			- iterator
+		- 词汇表
+			- sort
+				- ascend
+		- 高级
+			- lift
+			- ap
+			- 其他模式
+				- apeture
+			- https://github.com/fantasyland/fantasy-land#apply
+			-
+			-
