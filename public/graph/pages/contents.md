@@ -1,6 +1,5 @@
 alias:: 目录
 
-- [[Picking and Omitting Properties]]
-- [[理解和使用ReactTransition]]
+- [[Data Processing in Functional Programming with RamdaJS]]
 - [[开始使用React19: 数据加载]]
 - [[初探WebGPU]]

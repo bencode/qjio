@@ -1,15 +1,15 @@
-import { useState, useDeferredValue, Suspense } from 'react'
+import { useState, useDeferredValue, memo } from 'react'
 import { block } from '../../utils/lang'
 
 export function App() {
   const [search, setSearch] = useState('')
   const deferedSearch = useDeferredValue(search)
+  console.log('render app:', search, deferedSearch)
   return (
     <div>
+      <h1>useTransition: Two</h1>
       <input value={search} onChange={e => setSearch(e.target.value)} />
-      <Suspense fallback={<div>loading...</div>}>
-        <SearchResult search={deferedSearch} />
-      </Suspense>
+      <SearchResult search={deferedSearch} />
     </div>
   )
 }
@@ -19,6 +19,7 @@ type SearchResultProps = {
 }
 
 function SearchResult({ search }: SearchResultProps) {
-  block(100)
+  console.log('render search', search)
+  block(10)
   return <div>{search}</div>
 }
