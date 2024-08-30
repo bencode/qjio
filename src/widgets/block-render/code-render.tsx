@@ -19,7 +19,7 @@ export const CodeRender = ({ block }: CodeRenderProps) => {
   }, [])
 
   return (
-    <div className="bg-white px-2 py-1 text-sm">
+    <div className="bg-white px-2 py-1 text-sm overflow-auto">
       <pre ref={ref} className="code hjs language-javascript">
         {block.body}
       </pre>

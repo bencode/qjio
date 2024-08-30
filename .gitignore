@@ -38,5 +38,7 @@ next-env.d.ts
 # app
 cert/
 build/
-public/graph/
+public/graph/journals
+public/graph/logseq
+
 .env
