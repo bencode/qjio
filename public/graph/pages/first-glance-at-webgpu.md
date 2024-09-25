@@ -12,6 +12,7 @@ category:: #[[roam]]
 	- ### 参考资源
 		- [MDN WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
 		- [WebGL Fundanmentals](https://webglfundamentals.org/)
+		- [[Menu]]
 - ## WebGL vs WebGPU
 	- WebGL历史
 		- OpenGL 桌面版 (1993)
@@ -61,6 +62,7 @@ category:: #[[roam]]
 				- [tfjs-webgpu](https://codepen.io/bencode/pen/gOyZNxO)
 				  render:: codepen
 		- ### 3D类应用（VR、AR）
+		  id:: 66d15c92-8055-4dee-8507-52a34dfc5ce8
 			- Three.js
 				- 官方说正在支持
 			- Babylon.js

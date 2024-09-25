@@ -1,11 +1,9 @@
 alias:: Data Processing in Functional Programming with RamdaJS
 
 - ## Picking and Omitting Properties
-  collapsed:: true
 	- ### Scenario Explanation
 		- Imagine you’re working on a user management system where different parts of the application require varying levels of detail about the users. For example, you might need to extract just the user’s name and email for a contact list, or exclude sensitive data like passwords when logging user activities.
 	- ### Pure JavaScript Implementation
-	  collapsed:: true
 		- In plain JavaScript, you would typically manipulate the data directly:
 		- ```ts
 		  const users = [
@@ -73,7 +71,6 @@ alias:: Data Processing in Functional Programming with RamdaJS
 			  ```
 			- In this case, we’re directly modifying _basicInfo_ by pushing new elements into it, which introduces side effects—changes to data that occur outside the current scope of operations. Functional programming **prefers data transformation over imperative logic**, avoiding such side effects by ensuring that operations result in new, immutable data structures. This approach makes your code more predictable, easier to debug, and less prone to errors caused by unintended data mutations.
 	- ### Ramda Implementation
-	  collapsed:: true
 		- Now, let’s see how Ramda simplifies this process by using its built-in functions.
 			- **map**: Applies a function to each element in an array.
 			- **pick**: Selects specified properties from an object, returning a new object containing only those properties.
@@ -95,12 +92,10 @@ alias:: Data Processing in Functional Programming with RamdaJS
 		- **Currying**: In functional programming, currying transforms a function with multiple arguments into a series of functions, each taking one argument at a time. Ramda functions like pick and omit are curried, allowing for partial application and more flexible function composition.
 		- **Point-Free Style**: This style of programming emphasizes functions without explicitly mentioning the arguments they operate on. In the code above, the map function is used in a point-free style, making the code more abstract and easier to refactor. We’ll explore this concept further in upcoming sections.
 - ## Transforming Data with map, filter, and reduce
-  collapsed:: true
 	- ### Scenario Explanation
 	  collapsed:: true
 		- In many programming tasks, especially those involving arrays or lists, we often need to perform operations like transforming each element, filtering elements based on a condition, or reducing the list to a single value. Traditionally, in imperative programming, this is done using constructs like for loops and if statements. However, in functional programming, we replace these imperative constructs with expressive operations like map, filter, and reduce.
 	- ### Imperative Implementation
-	  collapsed:: true
 		- Let’s start by considering an example where you need to perform several operations on a list of users: transforming their names to uppercase, filtering out inactive users, and calculating the total number of active users.
 		- In an imperative style, you might write:
 		- ```ts
@@ -161,7 +156,6 @@ alias:: Data Processing in Functional Programming with RamdaJS
 			- **reduce**: Finally, we reduce the transformed array to count the number of active users.
 		- Each operation returns a new array or value, with no side effects or explicit loops. This approach is more declarative, expressing what needs to be done rather than how to do it.
 	- ### Ramda Implementation
-	  collapsed:: true
 		- Ramda further enhances the clarity and composability of these operations:
 		- ```ts
 		  import { map, filter, reduce } from 'ramda';
@@ -175,7 +169,6 @@ alias:: Data Processing in Functional Programming with RamdaJS
 		  console.log(activeUserCount);
 		  ```
 	- ### Core Functional Programming Insights
-	  collapsed:: true
 		- In functional programming, the focus is on transforming data through a series of expressions rather than controlling flow through loops and conditionals:
 			- **Expression-Based Logic**: _map_, _filter_, and _reduce_ are expressions that return values, making your code more predictable and eliminating the need for manual iteration or state management.
 			- **No Side Effects**: Each operation returns new data structures rather than modifying existing ones, adhering to the immutability principle.
