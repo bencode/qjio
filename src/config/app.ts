@@ -4,7 +4,7 @@ const appRoot = process.cwd()
 
 export const config = {
   graphRoot: pathUtil.join(appRoot, 'public/graph/pages'),
-  assetHost: 'https://s.fmap.dev/qjio',
+  assetHost: 'https://www.qijun.io',
 
   db: {
     host: process.env.DB_HOST,
