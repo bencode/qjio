@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "compile": "ts-node --project tsconfig-task.json src/tasks/compile.ts",
-    "upload": "oss-upload public/graph/assets -o assets",
+    "upload": "oss-upload public/graph/assets -o /assets",
     "test": "vitest src"
   },
   "dependencies": {
