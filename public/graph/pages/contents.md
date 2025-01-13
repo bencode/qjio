@@ -1,5 +1,6 @@
 alias:: 目录
 
+- [[Transducer: A powerful function composition pattern]]
 - SICP中的编程技艺
 	- [1.1 编程的元素](https://www.qijun.io/notebooks/index.html?path=sicp-1-1.ipynb)
 	- [1.2 程序及其生成的过程](https://www.qijun.io/notebooks/index.html?path=sicp-1-2.ipynb)
